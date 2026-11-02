@@ -1,27 +1,26 @@
 /* ===== COLORS (change these to restyle the whole site) ===== */
 :root {
-  --bg: #faf0ca;       /* Lemon Chiffon */
-  --card: #fff8de;
-  --text: #0d3b66;     /* Yale Blue */
-  --muted: #4d6a8a;
-  --accent: #0d3b66;   /* Yale Blue: the professional one */
-  --accent2: #f4d35e;  /* butter yellow: the playful pop */
-  --on-accent: #faf0ca;
+  --bg: #bfd8b8;       /* Avocado */
+  --card: #d6e8d0;
+  --text: #4d2b12;     /* Espresso */
+  --muted: #7a5636;
+  --accent: #4d2b12;   /* Espresso */
+  --accent2: #8fb585;  /* deeper avocado green for small details */
+  --on-accent: #bfd8b8;
   --gradient: var(--accent);
-  --border: #e6d792;
+  --border: #a3c49a;
 }
 body.dark {
-  --bg: #0a2b4d;
-  --card: #0d3b66;
-  --text: #faf0ca;
-  --muted: #c9c4a3;
-  --accent: #f4d35e;
-  --accent2: #faf0ca;
-  --on-accent: #0d3b66;
-  --border: #25507d;
+  --bg: #4d2b12;
+  --card: #5c3519;
+  --text: #bfd8b8;
+  --muted: #a9c4a1;
+  --accent: #bfd8b8;
+  --accent2: #8fb585;
+  --on-accent: #4d2b12;
+  --border: #6e4527;
   --gradient: var(--accent);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -178,4 +177,20 @@ footer {
   .hero h1 { font-size: 2.4rem; }
   .btn-row { justify-content: center; }
   .section .btn-row { justify-content: flex-start; }
+}
+/* ===== POLKA DOTS ===== */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  z-index: -1; pointer-events: none;
+  opacity: .18;               /* raise to .35 for bolder dots */
+  background:
+    radial-gradient(circle at 6% 14%,  var(--accent) 0 26px, transparent 27px),
+    radial-gradient(circle at 92% 9%,  var(--accent) 0 38px, transparent 39px),
+    radial-gradient(circle at 30% 42%, var(--accent) 0 32px, transparent 33px),
+    radial-gradient(circle at 72% 36%, var(--accent) 0 22px, transparent 23px),
+    radial-gradient(circle at 94% 62%, var(--accent) 0 34px, transparent 35px),
+    radial-gradient(circle at 12% 78%, var(--accent) 0 36px, transparent 37px),
+    radial-gradient(circle at 55% 88%, var(--accent) 0 28px, transparent 29px),
+    radial-gradient(circle at 84% 94%, var(--accent) 0 24px, transparent 25px);
 }
