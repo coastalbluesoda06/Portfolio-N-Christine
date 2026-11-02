@@ -22,7 +22,7 @@ body.dark {
   --gradient: var(--accent);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 112.5%; }
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: var(--bg);
@@ -194,3 +194,5 @@ body::before {
     radial-gradient(circle at 55% 88%, var(--accent) 0 28px, transparent 29px),
     radial-gradient(circle at 84% 94%, var(--accent) 0 24px, transparent 25px);
 }
+.section p { font-size: 1.1rem; }
+.card p { font-size: 1.05rem; }
