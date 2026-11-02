@@ -70,7 +70,7 @@ nav a:hover,nav a.active{color:var(--jade);text-shadow:0 0 12px rgba(111,224,189
 .deck .tarot:nth-child(2){transform:rotate(-2.5deg)}
 .deck .tarot:nth-child(3){transform:rotate(2.5deg)}
 .deck .tarot:nth-child(4){transform:rotate(7deg) translateY(14px)}
-.deck .tarot:hover,.deck .tarot:focus-visible{transform:rotate(0) translateY(-16px);box-shadow:0 24px 50px rgba(0,0,0,.55),0 0 36px rgba(111,224,189,.45);border-color:var(--jade)}
+.deck .tarot:hover,.deck .tarot:focus-visible,.deck .tarot:active{transform:rotate(0) translateY(-16px);box-shadow:0 24px 50px rgba(0,0,0,.55),0 0 36px rgba(111,224,189,.45);border-color:var(--jade)}
 .num-r{font-family:var(--display);font-size:.8rem;letter-spacing:.2em;color:var(--silver);margin-top:14px}
 .sym{font-size:3.4rem;line-height:1.1;margin:14px 0 8px;color:var(--jade);text-shadow:0 0 18px var(--jade),0 0 40px var(--jade2)}
 .tarot h3{font-family:var(--display);font-size:.95rem;letter-spacing:.16em;font-weight:600;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
