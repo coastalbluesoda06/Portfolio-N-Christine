@@ -33,7 +33,13 @@ a{color:inherit;text-decoration:none}
 .logo{font-family:var(--display);letter-spacing:.12em;font-size:1.05rem;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 nav{display:flex;gap:28px}
 nav a{font-family:var(--display);font-size:.8rem;letter-spacing:.14em;color:var(--muted);transition:color .3s,text-shadow .3s}
-nav a:hover,nav a.active{color:var(--jade);text-shadow:0 0 12px rgba(111,224,189,.6)}
+nav a:hover,nav a.active{color:var(--jade);text-shadow:0 0 12px rgba(111,224,189,.6)
+nav-card:active {
+  transform: translateY(-24px) rotate(0deg) scale(1.04) !important;
+  z-index: 20 !important;
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px var(--shadow);
+}
 .menu-btn{display:none;background:none;border:0;color:var(--gold);font-size:1.4rem;cursor:pointer}
 
 /* ===== HERO ===== */
