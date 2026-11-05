@@ -93,8 +93,8 @@ main{flex:1;width:100%}
 .about-photo{margin:0;background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:12px;
   box-shadow:0 8px 20px var(--shadow);transform:rotate(-2deg)}
 .about-photo img{display:block;width:100%;height:auto;border-radius:12px}
-.paper{background:#f7c5d5 url("paper.jpg") center/cover;color:#4d2b12;padding:32px 34px 22px;border-radius:6px;box-shadow:0 8px 20px var(--shadow)}
-.section .paper p{max-width:none;margin:0 0 16px;font-size:1.12rem;line-height:1.65;font-weight:500;color:#4d2b12;text-shadow:0 0 1px rgba(255,255,255,.4)}
+.paper{background:linear-gradient(rgba(255,249,243,.7),rgba(255,249,243,.7)),#f7c5d5 url("paper.jpg") center/cover;color:#4d2b12;padding:34px 36px 24px;border-radius:10px;border:1.5px solid rgba(77,43,18,.2);box-shadow:0 8px 20px var(--shadow)}
+.section .paper p{max-width:none;margin:0 0 16px;font-size:1.12rem;line-height:1.7;font-weight:400;color:#4d2b12}
 .paper-rule{border:0;border-top:3px solid #4d2b12;margin:22px 0 0}
 .connect{margin-top:28px;text-align:left}
 .connect-title{font-family:"Almendra",var(--serif),Georgia,serif;font-weight:700;font-size:2.3rem;line-height:1.1;color:var(--text);text-transform:none}
