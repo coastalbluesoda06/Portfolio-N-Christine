@@ -97,7 +97,7 @@
     .theme-btn:hover { background: var(--card); }
 
     /* ===== VIEWS ===== */
-    main { flex: 1; padding: 30px 8% 40px; max-width: 1200px; margin: 0 auto; width: 100%; overflow-x: clip; }
+    main { flex: 1; padding: 30px 5% 40px; max-width: 1360px; margin: 0 auto; width: 100%; overflow-x: clip; }
     .page-view { display: none; }
     .page-view.active { display: block; }
 
@@ -276,27 +276,40 @@
 
 
     /* ===== ABOUT VIEW ===== */
-    .about-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 40px; align-items: start; margin: 40px 0 20px; }
-    .about-photo { margin: 0; background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 12px; box-shadow: 0 8px 20px var(--shadow); transform: rotate(-2deg); }
+    .about-grid { display: grid; grid-template-columns: minmax(0,5.5fr) minmax(0,6.5fr); gap: 56px; align-items: start; margin: 24px 0 20px; }
+    .about-photo { margin: 0; background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 14px; box-shadow: 0 8px 20px var(--shadow); transform: rotate(-2deg); position: sticky; top: 110px; }
     .about-photo img { display: block; width: 100%; height: auto; border-radius: 12px; }
-    .paper { background: #f7c5d5 url("paper.jpg") center/cover; color: #4d2b12; padding: 32px 34px 22px; border-radius: 6px; box-shadow: 0 8px 20px var(--shadow); }
-    .paper p {
-  font-size: 1.12rem;
-  line-height: 1.65;
-  margin-bottom: 16px;
-  font-weight: 500; /* Makes the font a little bolder */
-  text-shadow: 0 0 1px rgba(255, 255, 255, 0.4); /* Adds a soft glow/contrast layer over the lines */
-}
+    .paper{background:linear-gradient(rgba(255,249,243,.7),rgba(255,249,243,.7)),#f7c5d5 url("paper.jpg") center/cover;color:#4d2b12;padding:44px 46px 30px;border-radius:10px;border:1.5px solid rgba(77,43,18,.2);box-shadow:0 8px 20px var(--shadow)}
+    .paper p{font-size:1.3rem;line-height:1.75;margin-bottom:20px;font-weight:400;color:#4d2b12}
     .paper-rule { border: 0; border-top: 3px solid #4d2b12; margin: 22px 0 0; }
     .connect { margin-top: 28px; }
-    .connect-title { font-family: "Almendra", var(--serif), Georgia, serif; font-weight: 700; font-size: 2.3rem; line-height: 1.1; color: var(--text); }
+    .connect-title { font-family: "Almendra", var(--serif), Georgia, serif; font-weight: 700; font-size: 2.9rem; line-height: 1.1; color: var(--text); }
     .connect .btn-row { margin-top: 14px; }
     @media (max-width: 860px) {
       .about-grid { grid-template-columns: 1fr; gap: 30px; }
-      .about-photo { max-width: 320px; margin: 0 auto; }
-      .paper { padding: 22px 20px 16px; }
+      .about-photo { position: static; max-width: 420px; margin: 0 auto; }
+      .paper { padding: 26px 22px 18px; }
+      .paper p { font-size: 1.15rem; }
       .connect { text-align: center; }
     }
+
+
+    /* ===== PAGE HEADERS (card symbol per page) + AT-A-GLANCE ===== */
+    .page-head { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 6px 0 22px; text-align: left; }
+    .page-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -.02em; line-height: 1; }
+    .page-sub { font-family: var(--hand); font-size: 1.45rem; color: var(--muted); margin-top: 6px; }
+    .mini-card { position: relative; width: 92px; height: 130px; flex: none; display: grid; place-items: center;
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 12px; color: var(--text);
+      box-shadow: -3px 4px 10px var(--shadow); transform: rotate(-4deg); }
+    .mini-card .card-corner { position: absolute; top: 8px; left: 9px; font-size: .95rem; }
+    .mini-card .card-corner.br { top: auto; left: auto; bottom: 8px; right: 9px; transform: rotate(180deg); }
+    .mini-card .card-center .icon { width: 42px; height: 42px; stroke-width: 1.4; }
+    .cs-card-icon { width: auto; height: auto; background: none; border: 0; box-shadow: none; }
+    .cs-card-icon .mini-card { width: 120px; height: 170px; }
+    .cs-card-icon .mini-card .card-center .icon { width: 54px; height: 54px; }
+    .glance { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+    .glance li { font-size: 1.02rem; padding: 4px 16px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
+    @media (max-width: 860px) { .page-head { flex-direction: column; text-align: center; gap: 14px; } .glance { justify-content: center; } }
 
     /* ===== TOUCH LIFT FOR CARDS ===== */
     .nav-card { -webkit-tap-highlight-color: transparent; }
@@ -349,6 +362,7 @@
   <!-- ===== HEADER / NAVBAR ===== -->
   <header class="navbar">
     <div class="nav-side left">
+      <button class="nav-btn active" id="nav-home" onclick="showView('home')">home</button>
       <button class="nav-btn" id="nav-about" onclick="showView('about')">about me</button>
       <button class="nav-btn" id="nav-projects" onclick="showView('projects')">projects</button>
     </div>
@@ -434,9 +448,17 @@
 
     <!-- ===== VIEW: ABOUT ===== -->
     <div id="view-about" class="page-view">
+      <div class="page-head">
+        <div data-card="about"></div>
+        <div><h1 class="page-title">about me</h1><p class="page-sub">the person behind the cards</p></div>
+      </div>
       <div class="about-grid">
         <figure class="about-photo"><img src="assets/about.jpg" alt="N Christine" /></figure>
         <div class="about-right">
+          <ul class="glance">
+            <li>BS Computer Science</li><li>University of the Cordilleras</li><li>Python · Java</li>
+            <li>Analytics &amp; Visualization</li><li>3 yrs training coordinator</li><li>English · Burmese</li>
+          </ul>
           <div class="paper">
             <p>I am a 20-year-old Computer Science student at the University of the Cordilleras who loves finding patterns in data. I use Python, Java, and analytics to build tools that are not only powerful under the hood, but also simple and genuinely helpful for people to use every day.</p>
             <p>Beyond my studies, I bring three years of experience as a training coordinator at a private school, alongside running my own educational tutoring initiatives. This background helps me break down tricky concepts—from coding logic to math and science—into bite-sized, engaging lessons that make learning feel effortless for others.</p>
@@ -448,6 +470,7 @@
             <div class="btn-row">
               <a class="btn primary" href="mailto:nhchristine725@gmail.com">gmail</a>
               <a class="btn outline" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">github</a>
+              <button class="btn outline" onclick="showView('home')">← back to home</button>
             </div>
           </div>
         </div>
@@ -456,6 +479,10 @@
 
     <!-- ===== VIEW 2: CONTACT PAGE ===== -->
     <div id="view-contact" class="page-view">
+      <div class="page-head">
+        <div data-card="contact"></div>
+        <div><h1 class="page-title">contact</h1><p class="page-sub">say hi, any time</p></div>
+      </div>
       <div class="contact-container">
         <h2>let's work together!</h2>
         <p>I'm open to opportunities, collaborations, and queries. Feel free to reach out via email or check out my work on GitHub!</p>
@@ -528,15 +555,15 @@
         const csSubtitle = document.getElementById('cs-subtitle');
         if (viewName === 'projects') {
           csTitle.textContent = "projects — coming soon";
-          csIcon.innerHTML = icon("code");
+          csIcon.innerHTML = cardMark("projects");
           csSubtitle.textContent = "I am curating my latest Data Analytics and Software Development projects. Check back shortly!";
         } else if (viewName === 'about') {
           csTitle.textContent = "about me — coming soon";
-          csIcon.innerHTML = icon("user");
+          csIcon.innerHTML = cardMark("about");
           csSubtitle.textContent = "A deeper look into my journey in Computer Science and Analytics is being written.";
         } else if (viewName === 'skills') {
           csTitle.textContent = "skills — coming soon";
-          csIcon.innerHTML = icon("chart");
+          csIcon.innerHTML = cardMark("skills");
           csSubtitle.textContent = "Interactive dashboards and skill meters are currently in development.";
         }
         csView.classList.add('active');
@@ -553,6 +580,12 @@
     };
     let currentView = 'home', busy = false;
     const sleep = ms => new Promise(r => setTimeout(r, ms));
+    // mini playing card used as each page's symbol
+    function cardMark(name) {
+      const v = VIEWS[name];
+      return `<div class="mini-card"><div class="card-corner">${v.rank}<span class="card-suit">${v.suit}</span></div><div class="card-center">${icon(v.icon)}</div><div class="card-corner br">${v.rank}<span class="card-suit">${v.suit}</span></div></div>`;
+    }
+    document.querySelectorAll('[data-card]').forEach(el => { el.innerHTML = cardMark(el.dataset.card); });
 
     async function showView(name) {
       if (busy) return;
@@ -719,3 +752,4 @@
   </script>
 </body>
 </html>
+
