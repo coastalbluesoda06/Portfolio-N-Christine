@@ -222,7 +222,7 @@
     .card-face.front .card-corner { position: absolute; top: 14px; left: 16px; }
     .card-face.front .card-corner.br { top: auto; left: auto; bottom: 14px; right: 16px; transform: rotate(180deg); }
     .card-face.front .card-center .icon { width: 84px; height: 84px; stroke-width: 1.3; }
-    .card-face.front .card-title-text { font-size: 2rem; }
+    .card-face.front .card-title-text { font-size: 1.55rem; padding: 0 16px; }
     .spade-fill { fill: currentColor; stroke: none; }
 
     /* ===== SPADE CURSOR ===== */
@@ -351,6 +351,26 @@
       .nav-card .card-badge { display: none; }
       .flip-card { width: 180px; height: 254px; }
     }
+
+    /* ===== EDUCATION & FAMILY PAGES ===== */
+    .content-wrap { max-width: 1000px; margin: 0 auto; }
+    .sec-label { font-family: var(--hand); font-weight: 700; font-size: 1.9rem; line-height: 1; margin: 30px 0 14px; }
+    .entries { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .entry { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px 26px; box-shadow: 0 8px 20px var(--shadow); }
+    .entry-tag { display: inline-block; font-size: .85rem; padding: 2px 12px; border: 1.5px solid var(--border); border-radius: 30px; color: var(--muted); margin-bottom: 10px; }
+    .entry h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; letter-spacing: -.01em; line-height: 1.2; }
+    .entry-org { color: var(--muted); margin: 4px 0 8px; }
+    .entry p { font-size: 1.08rem; }
+    .entry.soon { background: transparent; border-style: dashed; box-shadow: none; }
+    .card-title-text small { display: block; font-family: var(--sans); font-size: .8rem; font-weight: 500; line-height: 1.2; color: var(--muted); margin-top: 3px; }
+    @media (max-width: 860px) { .nav-card .card-title-text small { font-size: .62rem; } }
+    .back-row { display: flex; justify-content: center; margin-top: 36px; }
+    @media (max-width: 1180px) {
+      .navbar { grid-template-columns: 1fr; gap: 10px; padding: 12px 4%; }
+      .logo { font-size: 1.9rem; }
+      .nav-side { justify-content: center !important; flex-wrap: wrap; gap: 8px; }
+      button.nav-btn { padding: 6px 18px; font-size: .9rem; }
+    }
   </style>
 </head>
 <body>
@@ -367,6 +387,8 @@
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
     <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></symbol>
     <symbol id="i-spade" viewBox="0 0 24 24"><path d="M12 1.8C12 1.8 4 8.6 4 13.6a4.1 4.1 0 0 0 7 2.8c-.2 2.1-1 3.6-2.6 4.8h7.2c-1.6-1.2-2.4-2.7-2.6-4.8a4.1 4.1 0 0 0 7-2.8C20 8.6 12 1.8 12 1.8Z"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M16.5 14.2c2.9.3 4.5 2.3 4.5 5.8"/></symbol>
     <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="15" rx="2" transform="rotate(-8 9 13.5)"/><rect x="9" y="3" width="12" height="15" rx="2"/></symbol>
   </svg>
 
@@ -375,11 +397,11 @@
     <div class="nav-side left">
       <button class="nav-btn active" id="nav-home" onclick="showView('home')">home</button>
       <button class="nav-btn" id="nav-about" onclick="showView('about')">about me</button>
-      <button class="nav-btn" id="nav-projects" onclick="showView('projects')">projects</button>
+      <button class="nav-btn" id="nav-education" onclick="showView('education')">education &amp; achievements</button>
     </div>
     <div class="logo" onclick="showView('home')">N Christine</div>
     <div class="nav-side right">
-      <button class="nav-btn" id="nav-skills" onclick="showView('skills')">skills</button>
+      <button class="nav-btn" id="nav-family" onclick="showView('family')">family</button>
       <button class="nav-btn" id="nav-contact" onclick="showView('contact')">contact</button>
       <button id="themeBtn" class="theme-btn" aria-label="Toggle dark mode"><svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
     </div>
@@ -425,21 +447,21 @@
           </div>
         </div>
 
-        <div class="nav-card" onclick="showView('projects')">
+        <div class="nav-card" onclick="showView('education')">
           <div class="card-corner">K<span class="card-suit">♣</span></div>
-          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg></div>
           <div>
-            <div class="card-title-text">projects</div>
-            <div class="card-badge">Coming Soon</div>
+            <div class="card-title-text">education<small>&amp; achievements</small></div>
+            <div class="card-badge">Open</div>
           </div>
         </div>
 
-        <div class="nav-card" onclick="showView('skills')">
+        <div class="nav-card" onclick="showView('family')">
           <div class="card-corner red">Q<span class="card-suit">♥</span></div>
-          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-family"/></svg></div>
           <div>
-            <div class="card-title-text">skills</div>
-            <div class="card-badge">Coming Soon</div>
+            <div class="card-title-text">family</div>
+            <div class="card-badge">Open</div>
           </div>
         </div>
 
@@ -487,6 +509,73 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: EDUCATION & ACHIEVEMENTS ===== -->
+    <div id="view-education" class="page-view">
+      <div class="page-head">
+        <div data-card="education"></div>
+        <div><h1 class="page-title">education &amp; achievements</h1><p class="page-sub">where I've learned and what I've done</p></div>
+      </div>
+      <div class="content-wrap">
+        <h2 class="sec-label">education</h2>
+        <div class="entries">
+          <article class="entry">
+            <span class="entry-tag">in progress</span>
+            <h3>BS in Computer Science</h3>
+            <p class="entry-org">University of the Cordilleras</p>
+            <p>Focus areas: Python, Java, and analytics &amp; visualization.</p>
+          </article>
+        </div>
+
+        <h2 class="sec-label">achievements</h2>
+        <div class="entries">
+          <article class="entry">
+            <span class="entry-tag">3 years</span>
+            <h3>Training Coordinator</h3>
+            <p class="entry-org">Private school</p>
+            <p>Three years of experience coordinating trainings and helping others learn.</p>
+          </article>
+          <article class="entry">
+            <span class="entry-tag">ongoing</span>
+            <h3>Educational tutoring initiatives</h3>
+            <p class="entry-org">Self-run</p>
+            <p>Breaking down coding logic, math and science into clear, bite-sized lessons.</p>
+          </article>
+          <!-- To add one: copy an <article class="entry"> block above and edit the text. -->
+          <article class="entry soon">
+            <span class="entry-tag">more to come</span>
+            <h3>Awards &amp; certificates</h3>
+            <p>New milestones will be added here.</p>
+          </article>
+        </div>
+        <div class="back-row"><button class="btn outline" onclick="showView('home')">← back to home</button></div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: FAMILY ===== -->
+    <div id="view-family" class="page-view">
+      <div class="page-head">
+        <div data-card="family"></div>
+        <div><h1 class="page-title">family</h1><p class="page-sub">the people behind the person</p></div>
+      </div>
+      <div class="content-wrap">
+        <div class="entries">
+          <!-- To add a family member, copy this block and edit the text:
+          <article class="entry">
+            <span class="entry-tag">Mother</span>
+            <h3>Name here</h3>
+            <p>One or two sentences about them.</p>
+          </article>
+          -->
+          <article class="entry soon">
+            <span class="entry-tag">coming soon</span>
+            <h3>Meet my family</h3>
+            <p>This page is being written. Check back shortly!</p>
+          </article>
+        </div>
+        <div class="back-row"><button class="btn outline" onclick="showView('home')">← back to home</button></div>
       </div>
     </div>
 
@@ -555,40 +644,16 @@
       const navBtn = document.getElementById(`nav-${viewName}`);
       if (navBtn) navBtn.classList.add('active');
 
-      if (viewName === 'home') {
-        document.getElementById('view-home').classList.add('active');
-      } else if (viewName === 'contact') {
-        document.getElementById('view-contact').classList.add('active');
-      } else if (viewName === 'about') {
-        document.getElementById('view-about').classList.add('active');
-      } else {
-        const csView = document.getElementById('view-coming-soon');
-        const csTitle = document.getElementById('cs-title');
-        const csIcon = document.getElementById('cs-icon');
-        const csSubtitle = document.getElementById('cs-subtitle');
-        if (viewName === 'projects') {
-          csTitle.textContent = "projects — coming soon";
-          csIcon.innerHTML = cardMark("projects");
-          csSubtitle.textContent = "I am curating my latest Data Analytics and Software Development projects. Check back shortly!";
-        } else if (viewName === 'about') {
-          csTitle.textContent = "about me — coming soon";
-          csIcon.innerHTML = cardMark("about");
-          csSubtitle.textContent = "A deeper look into my journey in Computer Science and Analytics is being written.";
-        } else if (viewName === 'skills') {
-          csTitle.textContent = "skills — coming soon";
-          csIcon.innerHTML = cardMark("skills");
-          csSubtitle.textContent = "Interactive dashboards and skill meters are currently in development.";
-        }
-        csView.classList.add('active');
-      }
+      const target = document.getElementById('view-' + viewName) || document.getElementById('view-coming-soon');
+      target.classList.add('active');
     }
 
     // ===== PAGE TRANSITION =====
     const VIEWS = {
       home:     { rank: 'A',  suit: '♠', icon: 'home',  title: 'home' },
       about:    { rank: 'J',  suit: '♦', icon: 'user',  title: 'about me' },
-      projects: { rank: 'K',  suit: '♣', icon: 'code',  title: 'projects' },
-      skills:   { rank: 'Q',  suit: '♥', icon: 'chart', title: 'skills' },
+      education: { rank: 'K',  suit: '♣', icon: 'grad',  title: 'education & achievements' },
+      family:   { rank: 'Q',  suit: '♥', icon: 'family', title: 'family' },
       contact:  { rank: '10', suit: '♠', icon: 'mail',  title: 'contact' }
     };
     let currentView = 'home', busy = false;
