@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>N Christine — Portfolio</title>
+  <title>N Christine — CS Student · Data Analytics Internship</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Almendra:wght@400;700&display=swap" rel="stylesheet" />
@@ -114,7 +114,7 @@
       font-family: var(--serif); font-weight: 500;
       font-size: clamp(3rem, 7vw, 5.4rem); line-height: .95; letter-spacing: -.03em;
     }
-    .caption { font-family: var(--sans); font-size: .9rem; color: var(--muted); margin-top: 18px; min-height: 1.4rem; }
+    .caption { font-family: var(--sans); font-size: 1.35rem; color: var(--text); margin-top: 18px; min-height: 2rem; }
     .caption .star { color: var(--text); margin: 0 4px; }
     .cursor { animation: blink 1s infinite; }
     @keyframes blink { 50% { opacity: 0; } }
@@ -311,6 +311,13 @@
     .glance li { font-size: 1.02rem; padding: 4px 16px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
     @media (max-width: 860px) { .page-head { flex-direction: column; text-align: center; gap: 14px; } .glance { justify-content: center; } }
 
+    /* ===== HOMEPAGE ROLE LINE ===== */
+    .role { font-size: 1.35rem; line-height: 1.4; color: var(--text); margin-top: 20px; max-width: 460px; }
+    .role strong { font-weight: 600; }
+    .hero-chips { margin: 14px 0 0; }
+    .hero .caption { margin-top: 16px; }
+    @media (max-width: 860px) { .role { margin-left: auto; margin-right: auto; } }
+
     /* ===== TOUCH LIFT FOR CARDS ===== */
     .nav-card { -webkit-tap-highlight-color: transparent; }
     .nav-card.picked, .nav-card:active {
@@ -383,9 +390,11 @@
         </div>
         <div class="hero-text">
           <h1>let's<br>work<br>together!</h1>
+          <p class="role">Computer Science student seeking a <strong>data analytics internship</strong>.</p>
+          <ul class="glance hero-chips"><li>Python</li><li>Java</li><li>Analytics &amp; Visualization</li></ul>
           <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
           <div class="btn-row">
-            <button class="btn primary" onclick="showView('contact')">let's connect</button>
+            <button class="btn primary" onclick="showView('about')">about me</button>
             <button class="btn outline" onclick="document.getElementById('deck-title').scrollIntoView({behavior:'smooth'})">pick a card</button>
           </div>
         </div>
@@ -737,7 +746,7 @@
     // ===== TYPING EFFECT =====
     const typing = document.getElementById("typing");
     if (typing) {
-      const words = ["inquisitive cs student", "python & java developer", "aspiring data analyst", "lifelong learner"];
+      const words = ["inquisitive cs student", "python & java developer", "aspiring data analyst", "training coordinator & tutor"];
       let w = 0, c = 0, deleting = false;
       function type() {
         const word = words[w];
@@ -753,4 +762,3 @@
   </script>
 </body>
 </html>
-
