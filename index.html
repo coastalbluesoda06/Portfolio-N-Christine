@@ -546,7 +546,7 @@
           <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
           <div class="btn-row">
             <button class="btn primary" onclick="showView('contact')">contact me</button>
-            <button class="btn outline" onclick="document.getElementById('deck-title').scrollIntoView({behavior:'smooth'})">pick a card</button>
+            <button class="btn outline" onclick="pickRandomCard()">pick a card for you</button>
           </div>
         </div>
       </section>
@@ -855,6 +855,12 @@
       contact:  { rank: '10', suit: '♠', icon: 'mail',  title: 'contact' }
     };
     let currentView = 'home', busy = false;
+
+    function pickRandomCard() {
+      const availableViews = ['about', 'education', 'family', 'contact'];
+      const randomView = availableViews[Math.floor(Math.random() * availableViews.length)];
+      showView(randomView);
+    }
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     // mini playing card used as each page's symbol
     function cardMark(name) {
