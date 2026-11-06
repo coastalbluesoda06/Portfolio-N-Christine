@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>N Christine — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Almendra:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== COLORS & THEME (soft off-white, confetti dots, charcoal ink) ===== */
+    :root {
+      --bg: #bfd8b8;       /* Avocado */
+      --card: #d6e8d0;
+      --text: #4d2b12;     /* Espresso */
+      --muted: #7a5636;
+      --accent: #4d2b12;
+      --accent2: #8fb585;
+      --on-accent: #bfd8b8;
+      --border: #a3c49a;
+      --shadow: rgba(77, 43, 18, 0.12);
+      --hand: "Gaegu", "Comic Sans MS", cursive;
+      --serif: "Bodoni Moda", Georgia, serif;
+      --sans: "Archivo Narrow", "Segoe UI", Arial, sans-serif;
+    }
+    body.dark {
+      --bg: #4d2b12;
+      --card: #5c3519;
+      --text: #bfd8b8;
+      --muted: #a9c4a1;
+      --accent: #bfd8b8;
+      --accent2: #8fb585;
+      --on-accent: #4d2b12;
+      --border: #6e4527;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background .3s, color .3s;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Confetti dots background */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      z-index: -1; pointer-events: none;
+      animation: drift 14s ease-in-out infinite alternate;
+      opacity: .18;
+      background:
+        radial-gradient(circle at 6% 14%,  var(--accent) 0 26px, transparent 27px),
+        radial-gradient(circle at 92% 9%,  var(--accent) 0 38px, transparent 39px),
+        radial-gradient(circle at 30% 42%, var(--accent) 0 32px, transparent 33px),
+        radial-gradient(circle at 72% 36%, var(--accent) 0 22px, transparent 23px),
+        radial-gradient(circle at 94% 62%, var(--accent) 0 34px, transparent 35px),
+        radial-gradient(circle at 12% 78%, var(--accent) 0 36px, transparent 37px),
+        radial-gradient(circle at 55% 88%, var(--accent) 0 28px, transparent 29px),
+        radial-gradient(circle at 84% 94%, var(--accent) 0 24px, transparent 25px);
+    }
+    @keyframes drift { from { transform: translateY(-10px); } to { transform: translateY(12px); } }
+
+    /* ===== NAVBAR: pill buttons around a handwritten name ===== */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+      padding: 18px 5%;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+    }
+    .nav-side { display: flex; align-items: center; gap: 16px; }
+    .nav-side.left { justify-content: flex-end; }
+    .nav-side.right { justify-content: flex-start; }
+    .logo {
+      font-family: var(--hand); font-weight: 700; font-size: 2.1rem; line-height: 1;
+      color: var(--text); cursor: pointer; text-align: center; white-space: nowrap;
+    }
+    button.nav-btn {
+      font-family: var(--sans); font-size: .98rem; font-weight: 500;
+      color: var(--text); background: transparent; cursor: pointer;
+      padding: 9px 30px; border-radius: 30px; border: 1.5px solid var(--border);
+      transition: all .2s; white-space: nowrap;
+    }
+    button.nav-btn:hover, button.nav-btn.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+    .theme-btn {
+      background: none; border: none; cursor: pointer; color: var(--text);
+      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+    }
+    .theme-btn:hover { background: var(--card); }
+
+    /* ===== VIEWS ===== */
+    main { flex: 1; padding: 30px 5% 40px; max-width: 1360px; margin: 0 auto; width: 100%; overflow-x: clip; }
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex; align-items: center; justify-content: center;
+      gap: 56px; min-height: 480px; margin-bottom: 60px;
+    }
+    .hero-img img {
+      width: 340px; height: 340px; object-fit: cover; border-radius: 50%;
+      display: block;
+    }
+    .hero-text h1 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(3rem, 7vw, 5.4rem); line-height: .95; letter-spacing: -.03em;
+    }
+    .caption { font-family: var(--hand); font-size: 1.5rem; line-height: 1.2; color: var(--muted); margin-top: 18px; min-height: 2rem; }
+    .caption .star { color: var(--text); margin: 0 4px; }
+    .cursor { animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ===== CARD SECTION ===== */
+    .deck-section-title {
+      font-family: var(--serif); font-weight: 500; letter-spacing: -.02em;
+      text-align: center; margin-bottom: 18px; font-size: clamp(2rem, 4.4vw, 3rem);
+    }
+    .deck-hint { text-align: center; font-family: var(--hand); font-size: 1.3rem; color: var(--muted); }
+
+    .card-deck-wrapper {
+      --cw: 170px; --ov: .3;
+      display: flex; justify-content: center; align-items: flex-end; flex-wrap: nowrap;
+      min-height: calc(var(--cw) * 1.41 + 90px); padding: 56px 0 10px; margin-bottom: 30px;
+    }
+    .nav-card {
+      width: var(--cw); height: calc(var(--cw) * 1.41); flex: none;
+      margin-left: calc(var(--cw) * var(--ov) * -1);
+      background: var(--card);
+      border: 1.5px solid var(--border); border-radius: 14px;
+      padding: 16px; cursor: pointer;
+      transition: transform .3s cubic-bezier(.25,.8,.25,1), box-shadow .3s, border-color .3s;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: -4px 4px 12px var(--shadow); position: relative; overflow: hidden;
+      transform-origin: 50% 130%;
+      transform: translateY(var(--y, 0px)) rotate(var(--rot, 0deg));
+    }
+    .nav-card:first-child { margin-left: 0; }
+    .nav-card:hover, .nav-card:focus-visible {
+      transform: translateY(-34px) rotate(0deg) scale(1.06);
+      z-index: 20 !important; outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 16px 28px var(--shadow);
+    }
+    .card-corner { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; color: var(--text); display: flex; flex-direction: column; align-items: center; width: max-content; line-height: 1.1; }
+    .card-corner.red { color: var(--text); }
+    .card-suit { font-size: 1.2rem; line-height: 1; }
+    .card-center { display: grid; place-items: center; color: var(--text); }
+    .card-title-text { font-family: var(--hand); font-weight: 700; font-size: 1.5rem; line-height: 1; text-align: center; color: var(--text); }
+    .card-badge {
+      font-size: 0.72rem; text-align: center; padding: 2px 6px; border-radius: 10px; margin-top: 4px;
+      background: transparent; color: var(--muted); border: 1px solid var(--border);
+    }
+
+    /* ===== ICONS ===== */
+    .icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .card-center .icon { width: 56px; height: 56px; stroke-width: 1.4; }
+    .theme-btn .icon { width: 22px; height: 22px; }
+    .theme-btn .i-sun { display: none; }
+    body.dark .theme-btn .i-sun { display: block; }
+    body.dark .theme-btn .i-moon { display: none; }
+    .contact-card-btn .icon { width: 22px; height: 22px; }
+    .cs-card-icon .icon { width: 52px; height: 52px; stroke-width: 1.4; }
+    .btn .icon { width: 18px; height: 18px; vertical-align: -3px; margin-right: 8px; }
+    .deck-actions { display: flex; justify-content: center; margin: -10px 0 40px; }
+
+    /* ===== SHUFFLE IN: cards slide in from the right, shuffling toward the left ===== */
+    .card-deck-wrapper.pre .nav-card { opacity: 0; }
+    .nav-card.dealt { animation: shuffleIn .95s cubic-bezier(.2,.8,.3,1) backwards; }
+    @keyframes shuffleIn {
+      0%   { opacity: 0; transform: translateX(80vw) translateY(-20px) rotate(28deg); }
+      15%  { opacity: 1; }
+      45%  { transform: translateX(26vw) translateY(-46px) rotate(-16deg); }
+      72%  { transform: translateX(-5vw) translateY(-10px) rotate(9deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-card.dealt, .cs-card-icon { animation: none; }
+      .card-deck-wrapper.pre .nav-card { opacity: 1; }
+    }
+
+    /* ===== PAGE TRANSITION ===== */
+    html.transitioning, html.transitioning body { overflow-x: hidden; }
+    .flip-overlay {
+      position: fixed; inset: 0; z-index: 500; display: grid; place-items: center;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      visibility: hidden; opacity: 0; transition: opacity .15s, visibility 0s .2s;
+    }
+    .flip-overlay.show { visibility: visible; opacity: 1; transition: opacity .15s; }
+    .flip-scene { perspective: 1100px; }
+    .flip-card { position: relative; width: 210px; height: 296px; transform-style: preserve-3d; }
+    .card-face {
+      position: absolute; inset: 0; border-radius: 18px; overflow: hidden;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      box-shadow: 0 18px 40px var(--shadow);
+    }
+    .card-face.back {
+      background:
+        repeating-linear-gradient(45deg, transparent 0 9px, rgba(255,255,255,.07) 9px 10px),
+        var(--accent);
+      color: var(--on-accent);
+      display: grid; place-items: center;
+      border: 1.5px solid var(--accent);
+    }
+    .card-face.back::before {
+      content: ""; position: absolute; inset: 12px; border-radius: 10px;
+      border: 1.5px solid var(--on-accent); opacity: .5;
+    }
+    .card-face.back .spade-fill { width: 64px; height: 64px; }
+    .card-face.front {
+      transform: rotateY(180deg); background: var(--card); border: 1.5px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    }
+    .card-face.front .card-corner { position: absolute; top: 14px; left: 16px; }
+    .card-face.front .card-corner.br { top: auto; left: auto; bottom: 14px; right: 16px; transform: rotate(180deg); }
+    .card-face.front .card-center .icon { width: 84px; height: 84px; stroke-width: 1.3; }
+    .card-face.front .card-title-text { font-size: 1.55rem; padding: 0 16px; }
+    .spade-fill { fill: currentColor; stroke: none; }
+
+    /* ===== SPADE CURSOR ===== */
+    html, body, * { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.8C12 1.8 4 8.6 4 13.6a4.1 4.1 0 0 0 7 2.8c-.2 2.1-1 3.6-2.6 4.8h7.2c-1.6-1.2-2.4-2.7-2.6-4.8a4.1 4.1 0 0 0 7-2.8C20 8.6 12 1.8 12 1.8Z' fill='white' stroke='%234d2b12' stroke-width='1.3' stroke-linejoin='round'/%3E%3C/svg%3E") 13 3, auto; }
+    a, button, .nav-card, .logo { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.8C12 1.8 4 8.6 4 13.6a4.1 4.1 0 0 0 7 2.8c-.2 2.1-1 3.6-2.6 4.8h7.2c-1.6-1.2-2.4-2.7-2.6-4.8a4.1 4.1 0 0 0 7-2.8C20 8.6 12 1.8 12 1.8Z' fill='white' stroke='%234d2b12' stroke-width='1.3' stroke-linejoin='round'/%3E%3C/svg%3E") 17 4, pointer; }
+
+    /* ===== BUTTONS ===== */
+    .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+    .btn {
+      font-family: var(--sans); font-size: .98rem; font-weight: 500;
+      padding: 9px 28px; border-radius: 30px; cursor: pointer;
+      border: 1.5px solid var(--border); transition: transform .2s, background .2s, color .2s; display: inline-block;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .btn.outline { color: var(--text); background: transparent; }
+    .btn.outline:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+    /* ===== CONTACT VIEW ===== */
+    .contact-container {
+      max-width: 600px; margin: 40px auto; background: var(--card);
+      border: 1.5px solid var(--border); border-radius: 20px; padding: 40px;
+      box-shadow: 0 8px 20px var(--shadow); text-align: center;
+    }
+    .contact-container h2 { font-family: var(--serif); font-weight: 500; font-size: 2.4rem; margin-bottom: 12px; letter-spacing: -.02em; }
+    .contact-container p { color: var(--muted); margin-bottom: 28px; font-size: 1.1rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+    .contact-card-btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 12px; border-radius: 30px; background: transparent; border: 1.5px solid var(--border);
+      font-weight: 500; font-size: 1.05rem; color: var(--text); transition: all .2s;
+    }
+    .contact-card-btn:hover { background: var(--accent); color: var(--on-accent); transform: translateY(-2px); }
+
+    /* ===== COMING SOON VIEW ===== */
+    .coming-soon-container {
+      min-height: 400px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      background: var(--card); border: 1.5px dashed var(--border); border-radius: 24px;
+      padding: 50px 20px; margin: 40px 0;
+    }
+    .cs-card-icon {
+      width: 100px; height: 140px; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 12px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; margin-bottom: 24px; color: var(--text);
+      box-shadow: 0 6px 14px var(--shadow); animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .cs-title { font-family: var(--serif); font-weight: 500; font-size: 2.4rem; letter-spacing: -.02em; margin-bottom: 10px; }
+    .cs-subtitle { color: var(--muted); max-width: 450px; font-size: 1.1rem; margin-bottom: 28px; }
+
+
+    /* ===== ABOUT VIEW ===== */
+    .about-grid { display: grid; grid-template-columns: minmax(0,5.5fr) minmax(0,6.5fr); gap: 56px; align-items: start; margin: 24px 0 20px; }
+    .about-photo { margin: 0; background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 14px; box-shadow: 0 8px 20px var(--shadow); transform: rotate(-2deg); position: sticky; top: 110px; }
+    .about-photo img { display: block; width: 100%; height: auto; border-radius: 12px; }
+    .paper{background:linear-gradient(rgba(255,249,243,.7),rgba(255,249,243,.7)),#f7c5d5 url("paper.jpg") center/cover;color:#4d2b12;padding:44px 46px 30px;border-radius:10px;border:1.5px solid rgba(77,43,18,.2);box-shadow:0 8px 20px var(--shadow)}
+    .paper p{font-size:1.3rem;line-height:1.75;margin-bottom:20px;font-weight:400;color:#4d2b12}
+    .paper-rule { border: 0; border-top: 3px solid #4d2b12; margin: 22px 0 0; }
+    .connect { margin-top: 28px; }
+    .connect-title { font-family: "Almendra", var(--serif), Georgia, serif; font-weight: 700; font-size: 2.9rem; line-height: 1.1; color: var(--text); }
+    .connect .btn-row { margin-top: 14px; }
+    @media (max-width: 860px) {
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+      .about-photo { position: static; max-width: 420px; margin: 0 auto; }
+      .paper { padding: 26px 22px 18px; }
+      .paper p { font-size: 1.15rem; }
+      .connect { text-align: center; }
+    }
+
+
+    /* ===== PAGE HEADERS (card symbol per page) + AT-A-GLANCE ===== */
+    .page-head { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 6px 0 22px; text-align: left; }
+    .page-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -.02em; line-height: 1; }
+    .page-sub { font-family: var(--hand); font-size: 1.45rem; color: var(--muted); margin-top: 6px; }
+    .mini-card { position: relative; width: 92px; height: 130px; flex: none; display: grid; place-items: center;
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 12px; color: var(--text);
+      box-shadow: -3px 4px 10px var(--shadow); transform: rotate(-4deg); }
+    .mini-card .card-corner { position: absolute; top: 8px; left: 9px; font-size: .95rem; }
+    .mini-card .card-corner.br { top: auto; left: auto; bottom: 8px; right: 9px; transform: rotate(180deg); }
+    .mini-card .card-center .icon { width: 42px; height: 42px; stroke-width: 1.4; }
+    .cs-card-icon { width: auto; height: auto; background: none; border: 0; box-shadow: none; }
+    .cs-card-icon .mini-card { width: 120px; height: 170px; }
+    .cs-card-icon .mini-card .card-center .icon { width: 54px; height: 54px; }
+    .glance { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+    .glance li { font-size: 1.02rem; padding: 4px 16px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
+    @media (max-width: 860px) { .page-head { flex-direction: column; text-align: center; gap: 14px; } .glance { justify-content: center; } }
+
+    /* ===== HOMEPAGE ROLE LINE ===== */
+    .role { display: block; width: fit-content; max-width: 440px; font-family: var(--serif); font-weight: 400; font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.3; letter-spacing: -.01em; color: var(--text);
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 22px; padding: 14px 22px; margin-top: 22px; box-shadow: 0 6px 16px var(--shadow); }
+    .role strong { font-weight: 500; }
+    .hero .caption { margin-top: 18px; }
+    @media (max-width: 860px) { .role { margin-left: auto; margin-right: auto; } }
+
+    .badge { display: inline-flex; align-items: center; gap: 10px; font-size: 1.02rem; font-weight: 500; padding: 7px 18px; margin-bottom: 18px;
+      border: 1.5px solid var(--border); border-radius: 30px; background: var(--card); color: var(--text); }
+    .badge .dot { width: 10px; height: 10px; border-radius: 50%; background: #5fa35a; box-shadow: 0 0 0 4px rgba(95,163,90,.25); }
+    @media (max-width: 860px) { .badge { font-size: .86rem; padding: 6px 14px; gap: 8px; } .badge .dot { width: 8px; height: 8px; box-shadow: 0 0 0 3px rgba(95,163,90,.25); } }
+    /* ===== TOUCH LIFT FOR CARDS ===== */
+    .nav-card { -webkit-tap-highlight-color: transparent; }
+    .nav-card.picked, .nav-card:active {
+      transform: translateY(-34px) rotate(0deg) scale(1.06);
+      z-index: 20 !important;
+      border-color: var(--accent);
+      box-shadow: 0 16px 28px var(--shadow);
+    }
+
+    /* ===== FOOTER ===== */
+    footer { text-align: center; padding: 24px; margin-top: auto; color: var(--muted); font-size: .95rem; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .navbar { grid-template-columns: 1fr; gap: 10px; padding: 12px 4%; }
+      .logo { font-size: 1.9rem; }
+      .nav-side { justify-content: center !important; flex-wrap: wrap; gap: 8px; }
+      button.nav-btn { padding: 6px 18px; font-size: .9rem; }
+      .hero { flex-direction: column; text-align: center; gap: 28px; min-height: 0; }
+      .hero-img img { width: 220px; height: 220px; }
+      .btn-row { justify-content: center; }
+      .card-deck-wrapper { --cw: min(118px, 24vw); --ov: .42; padding-top: 44px; }
+      .nav-card { padding: 8px; border-radius: 10px; }
+      .nav-card .card-corner { font-size: .8rem; }
+      .nav-card .card-center .icon { width: 34px; height: 34px; }
+      .nav-card .card-title-text { font-size: 1.1rem; }
+      .nav-card .card-badge { display: none; }
+      .flip-card { width: 180px; height: 254px; }
+    }
+
+
+    /* ===== HOMEPAGE: fit the hero + card hand in one screen on desktop ===== */
+    @media (min-width: 901px) {
+      body:has(#view-home.active) main, body:has(#view-about.active) main { padding-top: 6px; padding-bottom: 0; }
+      body:has(#view-home.active) footer, body:has(#view-about.active) footer { padding: 6px; font-size: .85rem; }
+      #view-home .hero { min-height: 0; margin-bottom: 1.6vh; gap: 48px; }
+      #view-home .hero-img img { width: clamp(130px, 25vh, 340px); height: clamp(130px, 25vh, 340px); }
+      #view-home .hero-text h1 { font-size: clamp(2.2rem, 8.4vh, 5.4rem); }
+      #view-home .caption { margin-top: 1.2vh; font-size: clamp(1.1rem, 2.8vh, 1.5rem); min-height: 0; }
+      #view-home .btn-row { margin-top: 1.4vh; }
+      #view-home .deck-section-title { font-size: clamp(1.5rem, 4.4vh, 3rem); margin-bottom: .2vh; }
+      #view-home .deck-hint { font-size: clamp(1rem, 2.5vh, 1.3rem); line-height: 1.1; }
+      #view-home .card-deck-wrapper { --cw: clamp(90px, 15vh, 170px); min-height: 0; padding: clamp(22px, 4.2vh, 56px) 0 0; margin-bottom: 0; }
+      #view-home .nav-card { padding: calc(var(--cw) * .09); }
+      #view-home .nav-card .card-corner { font-size: calc(var(--cw) * .06 + .3rem); }
+      #view-home .nav-card .card-center .icon { width: calc(var(--cw) * .33); height: calc(var(--cw) * .33); }
+      #view-home .nav-card .card-title-text { font-size: calc(var(--cw) * .06 + .55rem); }
+      #view-home .nav-card .card-title-text small { font-size: .5rem; }
+      #view-home .nav-card .card-badge { font-size: .58rem; padding: 0 6px; margin-top: 2px; }
+      #view-home .deck-actions { margin: 3.4vh 0 0; position: relative; z-index: 30; }
+      #view-home .deck-actions .btn { padding: 5px 20px; font-size: .9rem; }
+    }
+
+    @media (min-width: 901px) and (max-width: 1180px) {
+      #view-home .hero-img img { width: clamp(120px, 21vh, 340px); height: clamp(120px, 21vh, 340px); }
+      #view-home .hero-text h1 { font-size: clamp(2rem, 7.4vh, 5.4rem); }
+      #view-home .card-deck-wrapper { --cw: clamp(84px, 12.6vh, 170px); }
+      #view-home .deck-actions { margin-top: 2.4vh; }
+    }
+
+    /* ===== EDUCATION & FAMILY PAGES ===== */
+    .content-wrap { max-width: 1000px; margin: 0 auto; }
+    .sec-label { font-family: var(--hand); font-weight: 700; font-size: 1.9rem; line-height: 1; margin: 30px 0 14px; }
+    .entries { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .entry { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 24px 26px; box-shadow: 0 8px 20px var(--shadow); }
+    .entry-tag { display: inline-block; font-size: .85rem; padding: 2px 12px; border: 1.5px solid var(--border); border-radius: 30px; color: var(--muted); margin-bottom: 10px; }
+    .entry h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; letter-spacing: -.01em; line-height: 1.2; }
+    .entry-org { color: var(--muted); margin: 4px 0 8px; }
+    .entry p { font-size: 1.08rem; }
+    .entry.soon { background: transparent; border-style: dashed; box-shadow: none; }
+    .card-title-text small { display: block; font-family: var(--sans); font-size: .8rem; font-weight: 500; line-height: 1.2; color: var(--muted); margin-top: 3px; }
+    @media (max-width: 860px) { .nav-card .card-title-text small { font-size: .62rem; } }
+    .back-row { display: flex; justify-content: center; margin-top: 36px; }
+    @media (max-width: 1180px) {
+      .navbar { grid-template-columns: 1fr; gap: 10px; padding: 12px 4%; }
+      .logo { font-size: 1.9rem; }
+      .nav-side { justify-content: center !important; flex-wrap: wrap; gap: 8px; }
+      button.nav-btn { padding: 6px 18px; font-size: .9rem; }
+    }
+
+    /* ===== ABOUT: numbered-cards layout ===== */
+    .ab { max-width: 1100px; margin: 0 auto; }
+    .ab-head { display: flex; align-items: center; gap: 22px; margin: 6px 0 30px; }
+    .ab-title-wrap { display: flex; align-items: center; gap: 14px; }
+    .ab-num, .ab-label, .ab-card-title, .ab-k, .ab-row dt { font-family: "DM Mono", ui-monospace, Menlo, Consolas, monospace; }
+    .ab-num { font-size: .95rem; color: var(--muted); }
+    .ab-line { width: 30px; height: 1.5px; background: var(--muted); }
+    .ab-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -.02em; line-height: 1; }
+    .nw { white-space: nowrap; }
+    .ab-id { display: flex; align-items: center; gap: 22px; margin-bottom: 16px; }
+    .ab-id img { width: 130px; height: 130px; border-radius: 18px; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 6px 14px var(--shadow); flex: none; background: var(--card); }
+    .ab-id-name { font-family: var(--serif); font-size: 2.2rem; line-height: 1.1; color: var(--text); }
+    .ab-id-sub { font-size: 1.05rem; letter-spacing: .08em; color: var(--muted); margin-top: 6px; }
+    .ab-contact a { color: inherit; text-decoration: none; }
+    .ab-contact a:hover { text-decoration: underline; }
+    .ab-card { background: var(--card); border: 1.5px solid var(--border); border-left: 5px solid var(--accent2); border-radius: 18px; padding: 24px 26px; box-shadow: 0 8px 20px var(--shadow); }
+    .ab-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; align-items: stretch; }
+    .ab-profile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+    .ab-photo { display: block; width: 100%; max-width: 320px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
+    .ab-name { font-family: var(--serif); font-weight: 500; font-size: 1.8rem; letter-spacing: -.01em; line-height: 1.1; }
+    .ab-profile .badge { margin: 0; text-align: left; }
+    .ab-card-title, .ab-label { font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .ab-card-title { margin-bottom: 8px; }
+    .ab-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+    .ab-row { padding: 11px 0; border-bottom: 1.5px dashed var(--border); min-width: 0; }
+    .ab-row.wide { grid-column: 1 / -1; }
+    .ab-row dt { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .ab-row dd { font-size: 1.1rem; margin: 2px 0 0; overflow-wrap: anywhere; }
+    .ab-row a { text-decoration: underline; text-underline-offset: 3px; }
+    .ab-label { display: flex; align-items: center; gap: 14px; margin: 48px 0 16px; }
+    .ab-label::after { content: ""; flex: 1; height: 1.5px; background: var(--border); }
+    .ab-label.first { margin-top: 44px; }
+    .ab-mid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: start; }
+    .ab-bio p { font-size: 1.4rem; line-height: 1.75; margin: 0 0 18px; color: var(--text); }
+    .ab-bio .paper-rule { margin-top: 24px; }
+    .ab-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ab-mini { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border-radius: 14px; }
+    .ab-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "DM Mono", ui-monospace, monospace; font-size: .8rem; margin-top: 2px; }
+    .ab-k { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .ab-v { font-size: 1.08rem; line-height: 1.35; margin-top: 2px; }
+    .ab-stats { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; margin: 28px 0 0; padding: 10px 8px; border-radius: 18px; background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+    .ab-stat { text-align: center; padding: 0 12px; }
+    .ab-stat + .ab-stat { border-left: 1.5px solid color-mix(in srgb, var(--accent) 20%, transparent); }
+    .ab-big { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; }
+    .ab-cap { color: var(--muted); font-size: .85rem; line-height: 1.25; }
+    .ab-skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .ab-skill-head { display: flex; align-items: flex-start; gap: 12px; }
+    .ab-skill-head h3 { font-family: var(--sans); font-weight: 600; font-size: 1.3rem; line-height: 1.25; letter-spacing: .01em; color: var(--text); }
+    .ab-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .ab-tags li { font-size: .98rem; padding: 3px 14px; border-radius: 30px; border: 1.5px solid var(--border); background: transparent; color: var(--text); }
+    .ab .connect { margin-top: 52px; }
+    @media (min-width: 901px) {
+      .ab { max-width: 1280px; }
+      .ab-head { margin: 0 0 12px; gap: 12px; }
+      .ab-head [data-card] { zoom: .5; }
+      .ab-title { font-size: 2.8rem; }
+      .ab-top { grid-template-columns: minmax(0, 5.7fr) minmax(0, 5.3fr); gap: 28px; align-items: stretch; }
+      .ab-bio { display: flex; flex-direction: column; justify-content: flex-start; gap: 12px; }
+      .ab-bio p { font-size: 1.35rem; line-height: 1.5; margin: 0; }
+      .ab-bio .paper-rule { display: none; }
+      .ab-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .ab-mini { padding: 12px 14px; gap: 10px; }
+      .ab-mini .ab-n { width: 28px; height: 28px; font-size: .85rem; margin-top: 0; }
+      .ab-mini .ab-k { font-size: .75rem; }
+      .ab-id { margin-bottom: 8px; gap: 16px; }
+      .ab-id img { width: 90px; height: 90px; border-radius: 12px; }
+      .ab-id-name { font-size: 1.8rem; }
+      .ab-id-sub { font-size: .95rem; margin-top: 2px; }
+      .ab-v { font-size: 1.05rem; line-height: 1.25; }
+      .ab-stats { margin-top: 12px; padding: 10px 8px; }
+      .ab-big { font-size: 1.8rem; }
+      .ab-cap { font-size: .95rem; }
+      .ab-label { margin: 12px 0 8px; font-size: .9rem; }
+      .ab-skills { gap: 12px; }
+      .ab-skills .ab-card { padding: 14px 18px; }
+      .ab-skill-head h3 { font-size: 1.15rem; }
+      .ab-tags { margin-top: 8px; gap: 6px; }
+      .ab-tags li { font-size: .9rem; padding: 2px 12px; }
+      .ab .connect { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; text-align: left; }
+      .ab .connect .connect-title { font-size: 1.8rem; }
+      .ab .connect .btn-row { margin-top: 0; }
+    }
+    @media (max-width: 900px) {
+      .ab-head { flex-direction: column; gap: 14px; }
+      .ab-top, .ab-mid, .ab-skills { grid-template-columns: 1fr; }
+      .ab-mid { gap: 0; }
+      .ab-dl { grid-template-columns: 1fr 1fr; gap: 0 20px; }
+      .ab-bio p { font-size: 1.3rem; }
+    }
+    @media (max-width: 520px) {
+      .ab-cards, .ab-dl { grid-template-columns: 1fr; }
+      .ab-stats { padding: 10px 4px; }
+      .ab-stat { padding: 0 6px; }
+      .ab-cap { font-size: .78rem; }
+      .ab-card { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ICON SPRITE ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m10 9-3 3 3 3"/><path d="m14 9 3 3-3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><rect x="7.5" y="12" width="3" height="5" rx=".6"/><rect x="12.5" y="8" width="3" height="9" rx=".6"/><rect x="17.5" y="5" width="2.5" height="12" rx=".6" transform="translate(-1 0)"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></symbol>
+    <symbol id="i-spade" viewBox="0 0 24 24"><path d="M12 1.8C12 1.8 4 8.6 4 13.6a4.1 4.1 0 0 0 7 2.8c-.2 2.1-1 3.6-2.6 4.8h7.2c-1.6-1.2-2.4-2.7-2.6-4.8a4.1 4.1 0 0 0 7-2.8C20 8.6 12 1.8 12 1.8Z"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5"/><path d="M22 9v6"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M16.5 14.2c2.9.3 4.5 2.3 4.5 5.8"/></symbol>
+    <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="15" rx="2" transform="rotate(-8 9 13.5)"/><rect x="9" y="3" width="12" height="15" rx="2"/></symbol>
+  </svg>
+
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header class="navbar">
+    <div class="nav-side left">
+      <button class="nav-btn active" id="nav-home" onclick="showView('home')">home</button>
+      <button class="nav-btn" id="nav-about" onclick="showView('about')">about me</button>
+      <button class="nav-btn" id="nav-education" onclick="showView('education')">education &amp; achievements</button>
+    </div>
+    <div class="logo" onclick="showView('home')">N Christine</div>
+    <div class="nav-side right">
+      <button class="nav-btn" id="nav-family" onclick="showView('family')">family</button>
+      <button class="nav-btn" id="nav-contact" onclick="showView('contact')">contact</button>
+      <button id="themeBtn" class="theme-btn" aria-label="Toggle dark mode"><svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== VIEW 1: HOME PAGE ===== -->
+    <div id="view-home" class="page-view active">
+      <section class="hero">
+        <div class="hero-img">
+          <img src="assets/photo.jpg" alt="N Christine profile photo" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 230 230%27%3E%3Crect width=%27230%27 height=%27230%27 fill=%27%23d9d9d6%27/%3E%3Ctext x=%2750%25%27 y=%2754%25%27 text-anchor=%27middle%27 font-family=%27Georgia,serif%27 font-size=%2772%27 fill=%27%234d2b12%27%3ENC%3C/text%3E%3C/svg%3E'" />
+        </div>
+        <div class="hero-text">
+          <h1>let's<br>work<br>together!</h1>
+          <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
+          <div class="btn-row">
+            <button class="btn primary" onclick="showView('contact')">contact me</button>
+            <button class="btn outline" onclick="pickRandomCard()">pick a card</button>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="deck-section-title" id="deck-title">What's in the cards for us?</h2>
+      <p class="deck-hint">pick a card, any card</p>
+
+      <div class="card-deck-wrapper pre" id="deck">
+        <div class="nav-card" onclick="showView('home')">
+          <div class="card-corner">A<span class="card-suit">♠</span></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg></div>
+          <div>
+            <div class="card-title-text">home</div>
+            <div class="card-badge">Active</div>
+          </div>
+        </div>
+
+        <div class="nav-card" onclick="showView('about')">
+          <div class="card-corner red">J<span class="card-suit">♦</span></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></div>
+          <div>
+            <div class="card-title-text">about me</div>
+            <div class="card-badge">Open</div>
+          </div>
+        </div>
+
+        <div class="nav-card" onclick="showView('education')">
+          <div class="card-corner">K<span class="card-suit">♣</span></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg></div>
+          <div>
+            <div class="card-title-text">education<small>&amp; achievements</small></div>
+            <div class="card-badge">Open</div>
+          </div>
+        </div>
+
+        <div class="nav-card" onclick="showView('family')">
+          <div class="card-corner red">Q<span class="card-suit">♥</span></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-family"/></svg></div>
+          <div>
+            <div class="card-title-text">family</div>
+            <div class="card-badge">Open</div>
+          </div>
+        </div>
+
+        <div class="nav-card" onclick="showView('contact')">
+          <div class="card-corner">10<span class="card-suit">♠</span></div>
+          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div>
+          <div>
+            <div class="card-title-text">contact</div>
+            <div class="card-badge">Active</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deck-actions">
+        <button class="btn outline" id="shuffleBtn"><svg class="icon" aria-hidden="true"><use href="#i-shuffle"/></svg>shuffle deck</button>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: ABOUT ===== -->
+    <div id="view-about" class="page-view">
+      <div class="ab">
+        <div class="ab-head">
+          <div data-card="about"></div>
+          <div class="ab-title-wrap"><span class="ab-num">01</span><span class="ab-line"></span><h1 class="ab-title">About Me</h1></div>
+        </div>
+
+        <!-- FIX: Moving ab-id above the columns so the left text and right cards align perfectly -->
+        <div class="ab-id">
+          <img src="assets/photo.jpg" alt="N Christine profile photo" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 230 230%27%3E%3Crect width=%27230%27 height=%27230%27 fill=%27%23d9d9d6%27/%3E%3Ctext x=%2750%25%27 y=%2754%25%27 text-anchor=%27middle%27 font-family=%27Georgia,serif%27 font-size=%2772%27 fill=%27%234d2b12%27%3ENC%3C/text%3E%3C/svg%3E'" />
+          <div><div class="ab-id-name">N Christine</div><div class="ab-id-sub">BSCS</div></div>
+        </div>
+
+        <div class="ab-top">
+          <section class="ab-bio">
+            <p>I'm a first-year Computer Science student at the University of the Cordilleras. I use Python, Java, and analytics to find patterns in data and turn them into tools that are simple and genuinely useful to the people who use them.</p>
+            <p>Alongside my studies, I've spent three years as a training coordinator at a private school and run my own tutoring business, turning complex math problems into clear, bite-sized lessons. That experience taught me to explain technical ideas simply, a skill I'm excited to bring to reporting and presenting data.</p>
+            <p>Outside class, I explore linguistics and build digital study spaces. I learn fast, stay curious, and I'm ready to grow into an analyst who makes insights easy for anyone to understand.</p>
+            <hr class="paper-rule" />
+          </section>
+          
+          <div class="ab-side">
+            <div class="ab-cards">
+              <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Birthday</div><div class="ab-v"><span class="nw">April 19, 2006</span> · <span class="nw">20 years old</span></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Location</div><div class="ab-v">Yangon, Myanmar</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">College · 1st year</div><div class="ab-v"><span class="nw">University of the Cordilleras</span><br><span class="nw">BS Computer Science</span></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">Hobbies</div><div class="ab-v"><span class="nw">Gaming · Sketching</span><br><span class="nw">Self-studying</span></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">5</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">6</span><div><div class="ab-k">Technical</div><div class="ab-v">Python · Java</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">7</span><div><div class="ab-k">Email</div><div class="ab-v ab-contact"><a class="nw" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">nhchristine725@gmail.com</a></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">8</span><div><div class="ab-k">Phone</div><div class="ab-v ab-contact"><a class="nw" href="tel:+639278258065">0927 825 8065</a></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ab-stats">
+          <div class="ab-stat"><div class="ab-big">1</div><div class="ab-cap">Degree in progress</div></div>
+          <div class="ab-stat"><div class="ab-big">3</div><div class="ab-cap">Years as training coordinator</div></div>
+          <div class="ab-stat"><div class="ab-big">3</div><div class="ab-cap">Skill areas</div></div>
+        </div>
+
+        <h2 class="ab-label">Skills</h2>
+        <div class="ab-skills">
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">1</span><h3>Programming Fundamentals</h3></div>
+            <ul class="ab-tags"><li>Python &amp; Java Basics</li><li>HTML/CSS</li><li>Code Reading</li></ul>
+          </article>
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">2</span><h3>Digital Content &amp; Design</h3></div>
+            <ul class="ab-tags"><li>Web Layouts</li><li>Visual Presentation</li><li>Branding</li></ul>
+          </article>
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">3</span><h3>Teaching &amp; Coordination</h3></div>
+            <ul class="ab-tags"><li>Instruction</li><li>Lesson Planning</li><li>Team Coordination</li></ul>
+          </article>
+        </div>
+
+
+        <div class="connect">
+          <h2 class="connect-title">connect with me!</h2>
+          <div class="btn-row">
+            <a class="btn primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">gmail</a>
+            <a class="btn outline" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">github</a>
+            <button class="btn outline" onclick="showView('home')">← back to home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: EDUCATION & ACHIEVEMENTS ===== -->
+    <div id="view-education" class="page-view">
+      <div class="page-head">
+        <div data-card="education"></div>
+        <div><h1 class="page-title">education &amp; achievements</h1><p class="page-sub">where I've learned and what I've done</p></div>
+      </div>
+      <div class="content-wrap">
+        <h2 class="sec-label">education</h2>
+        <div class="entries">
+          <article class="entry">
+            <span class="entry-tag">in progress</span>
+            <h3>BS in Computer Science</h3>
+            <p class="entry-org">University of the Cordilleras</p>
+            <p>Focus areas: Python, Java, and analytics &amp; visualization.</p>
+          </article>
+        </div>
+
+        <h2 class="sec-label">achievements</h2>
+        <div class="entries">
+          <article class="entry">
+            <span class="entry-tag">3 years</span>
+            <h3>Training Coordinator</h3>
+            <p class="entry-org">Private school</p>
+            <p>Three years of experience coordinating trainings and helping others learn.</p>
+          </article>
+          <article class="entry">
+            <span class="entry-tag">ongoing</span>
+            <h3>Educational tutoring initiatives</h3>
+            <p class="entry-org">Self-run</p>
+            <p>Turning complex math problems into clear, bite-sized lessons.</p>
+          </article>
+          <!-- To add one: copy an <article class="entry"> block above and edit the text. -->
+          <article class="entry soon">
+            <span class="entry-tag">more to come</span>
+            <h3>Awards &amp; certificates</h3>
+            <p>New milestones will be added here.</p>
+          </article>
+        </div>
+        <div class="back-row"><button class="btn outline" onclick="showView('home')">← back to home</button></div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: FAMILY ===== -->
+    <div id="view-family" class="page-view">
+      <div class="page-head">
+        <div data-card="family"></div>
+        <div><h1 class="page-title">family</h1><p class="page-sub">the people behind the person</p></div>
+      </div>
+      <div class="content-wrap">
+        <div class="entries">
+          <!-- To add a family member, copy this block and edit the text:
+          <article class="entry">
+            <span class="entry-tag">Mother</span>
+            <h3>Name here</h3>
+            <p>One or two sentences about them.</p>
+          </article>
+          -->
+          <article class="entry soon">
+            <span class="entry-tag">coming soon</span>
+            <h3>Meet my family</h3>
+            <p>This page is being written. Check back shortly!</p>
+          </article>
+        </div>
+        <div class="back-row"><button class="btn outline" onclick="showView('home')">← back to home</button></div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW 2: CONTACT PAGE ===== -->
+    <div id="view-contact" class="page-view">
+      <div class="page-head">
+        <div data-card="contact"></div>
+        <div><h1 class="page-title">contact</h1><p class="page-sub">say hi, any time</p></div>
+      </div>
+      <div class="contact-container">
+        <h2>let's work together!</h2>
+        <p>I'm open to opportunities, collaborations, and queries. Feel free to reach out via email or check out my work on GitHub!</p>
+
+        <div class="contact-links">
+          <a class="contact-card-btn" href="mailto:nhchristine725@gmail.com">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email me
+          </a>
+          <a class="contact-card-btn" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub profile
+          </a>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <button class="btn outline" onclick="showView('home')">← back to home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== VIEW 3: COMING SOON ===== -->
+    <div id="view-coming-soon" class="page-view">
+      <div class="coming-soon-container">
+        <div class="cs-card-icon" id="cs-icon"><svg class="icon" aria-hidden="true"><use href="#i-cards"/></svg></div>
+        <h2 class="cs-title" id="cs-title">Card Under Construction</h2>
+        <p class="cs-subtitle" id="cs-subtitle">This portfolio page is currently being crafted and will be revealed soon!</p>
+        <div class="btn-row">
+          <button class="btn primary" onclick="showView('home')">back to home</button>
+          <button class="btn outline" onclick="showView('contact')">contact me</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 N Christine • Computer Science Portfolio</p>
+  </footer>
+
+  <!-- ===== FLIP CARD OVERLAY ===== -->
+  <div class="flip-overlay" id="flipOverlay" aria-hidden="true">
+    <div class="flip-pos" id="flipPos">
+      <div class="flip-scene">
+        <div class="flip-card" id="flipCard">
+          <div class="card-face back"><svg class="icon spade-fill" aria-hidden="true"><use href="#i-spade"/></svg></div>
+          <div class="card-face front" id="flipFront"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const icon = name => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+
+    // ===== NAVIGATION / VIEW SWITCHER =====
+    function renderView(viewName) {
+      document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const navBtn = document.getElementById(`nav-${viewName}`);
+      if (navBtn) navBtn.classList.add('active');
+
+      const target = document.getElementById('view-' + viewName) || document.getElementById('view-coming-soon');
+      target.classList.add('active');
+      fitAbout();
+    }
+
+    // Shrink the About page on desktop so all of it fits in one screen (no scrolling)
+    function fitAbout() {
+      const ab = document.querySelector('#view-about .ab');
+      if (!ab) return;
+      // zoom-to-fit ENABLED so the About page fits in one screen
+      ab.style.zoom = ''; ab.style.maxWidth = '';
+      const view = document.getElementById('view-about');
+      if (!view.classList.contains('active') || window.innerWidth < 901) return;
+      let z = 1;
+      for (let i = 0; i < 10; i++) {
+        const abH = ab.getBoundingClientRect().height / z;
+        const mainEl = document.querySelector('main');
+        const other = ab.getBoundingClientRect().top + window.scrollY
+          + parseFloat(getComputedStyle(mainEl).paddingBottom) + document.querySelector('footer').offsetHeight;
+        const next = Math.min(1, Math.max(0.55, (window.innerHeight - other - 6) / abH));
+        if (Math.abs(next - z) < 0.005 && i) break;
+        z = next;
+        ab.style.zoom = z.toFixed(3);
+        // use the extra width the smaller scale frees up, so text wraps less and the page gets shorter
+        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+      }
+      // safety: shave the scale until nothing scrolls
+      while (document.documentElement.scrollHeight > window.innerHeight + 1 && z > 0.5) {
+        z -= 0.01;
+        ab.style.zoom = z.toFixed(3);
+        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+      }
+      if (z >= 0.999) { ab.style.zoom = ''; ab.style.maxWidth = ''; }
+    }
+    window.addEventListener('resize', fitAbout);
+    window.addEventListener('load', fitAbout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAbout);
+
+    // ===== PAGE TRANSITION =====
+    const VIEWS = {
+      home:     { rank: 'A',  suit: '♠', icon: 'home',  title: 'home' },
+      about:    { rank: 'J',  suit: '♦', icon: 'user',  title: 'about me' },
+      education: { rank: 'K',  suit: '♣', icon: 'grad',  title: 'education & achievements' },
+      family:   { rank: 'Q',  suit: '♥', icon: 'family', title: 'family' },
+      contact:  { rank: '10', suit: '♠', icon: 'mail',  title: 'contact' }
+    };
+    let currentView = 'home', busy = false;
+
+    function pickRandomCard() {
+      const availableViews = ['about', 'education', 'family', 'contact'];
+      const randomView = availableViews[Math.floor(Math.random() * availableViews.length)];
+      showView(randomView);
+    }
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    // mini playing card used as each page's symbol
+    function cardMark(name) {
+      const v = VIEWS[name];
+      return `<div class="mini-card"><div class="card-corner">${v.rank}<span class="card-suit">${v.suit}</span></div><div class="card-center">${icon(v.icon)}</div><div class="card-corner br">${v.rank}<span class="card-suit">${v.suit}</span></div></div>`;
+    }
+    document.querySelectorAll('[data-card]').forEach(el => { el.innerHTML = cardMark(el.dataset.card); });
+
+    async function showView(name) {
+      if (busy) return;
+      if (name === currentView) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) { renderView(name); currentView = name; window.scrollTo(0, 0); return; }
+
+      busy = true;
+      const root = document.documentElement;
+      const overlay = document.getElementById('flipOverlay');
+      const pos = document.getElementById('flipPos');
+      const card = document.getElementById('flipCard');
+      const v = VIEWS[name];
+      const red = (v.suit === '♦' || v.suit === '♥') ? ' red' : '';
+      [pos, card].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+
+      document.getElementById('flipFront').innerHTML =
+        `<div class="card-corner${red}">${v.rank}<span class="card-suit">${v.suit}</span></div>
+         <div class="card-center">${icon(v.icon)}</div>
+         <div class="card-title-text">${v.title}</div>
+         <div class="card-corner br${red}">${v.rank}<span class="card-suit">${v.suit}</span></div>`;
+
+      root.classList.add('transitioning');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.id === `nav-${name}`));
+
+      const old = document.querySelector('.page-view.active');
+      const discard = old.animate(
+        [{ transform: 'none', opacity: 1 }, { transform: 'translate(45vw, 12vh) rotate(14deg)', opacity: 0 }],
+        { duration: 320, easing: 'cubic-bezier(.5,0,.9,.4)', fill: 'forwards' }
+      );
+      await sleep(120);
+
+      overlay.classList.add('show');
+      pos.animate(
+        [{ opacity: 0, transform: 'translateY(60px) scale(.85)' }, { opacity: 1, transform: 'none' }],
+        { duration: 260, easing: 'ease-out', fill: 'both' }
+      );
+      const flip = card.animate(
+        [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(180deg)' }],
+        { duration: 450, delay: 100, easing: 'cubic-bezier(.45,.05,.25,1)', fill: 'both' }
+      );
+      await flip.finished;
+      await sleep(120);
+
+      discard.cancel();
+      renderView(name);
+      currentView = name;
+      window.scrollTo(0, 0);
+      overlay.classList.remove('show');
+      pos.animate(
+        [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-30px) scale(.92)' }],
+        { duration: 220, easing: 'ease-in', fill: 'forwards' }
+      );
+      const incoming = document.querySelector('.page-view.active');
+      incoming.animate(
+        [{ opacity: 0, transform: 'translateY(-50px) rotate(-4deg) scale(.97)' }, { opacity: 1, transform: 'none' }],
+        { duration: 400, easing: 'cubic-bezier(.2,.8,.3,1)' }
+      );
+      await sleep(400);
+      root.classList.remove('transitioning');
+      busy = false;
+    }
+
+    // ===== HAND OF CARDS: fan the deck out =====
+    const deck = document.getElementById('deck');
+    function layoutHand() {
+      const cards = [...deck.children];
+      const n = cards.length;
+      cards.forEach((c, i) => {
+        const off = i - (n - 1) / 2;
+        c.style.setProperty('--rot', `${off * 7}deg`);
+        c.style.setProperty('--y', `${off * off * 5}px`);
+        c.style.zIndex = i + 1;
+        c.tabIndex = 0;
+        c.setAttribute('role', 'button');
+      });
+    }
+    deck.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+    });
+    layoutHand();
+     // Touch screens: lift the card first, then open the page
+    deck.addEventListener('click', e => {
+      const card = e.target.closest('.nav-card');
+      if (!card || !matchMedia('(hover: none)').matches) return;
+      if (card.dataset.go) { delete card.dataset.go; return; }  // second pass: let it open
+      e.stopPropagation();                                      // first pass: block the instant open
+      card.classList.add('picked');
+      setTimeout(() => {
+        card.dataset.go = '1';
+        card.click();
+        card.classList.remove('picked');
+      }, 280);
+    }, true);
+    // ===== SHUFFLE IN (right → left) =====
+    function playShuffle() {
+      deck.classList.remove('pre');
+      [...deck.children].forEach((card, i) => {
+        card.classList.remove('dealt');
+        void card.offsetWidth;                        // restart animation
+        card.style.animationDelay = `${i * 110}ms`;
+        card.classList.add('dealt');
+      });
+    }
+
+    // Hidden until the card section scrolls into view, then the cards shuffle in from the right
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      deck.classList.remove('pre');
+    } else {
+      let played = false;
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !played) {
+            played = true;
+            playShuffle();
+          } else if (!e.isIntersecting && played) {
+            // reset once fully out of view so it shuffles again on the next scroll down
+            played = false;
+            deck.classList.add('pre');
+            [...deck.children].forEach(c => c.classList.remove('dealt'));
+          }
+        });
+      }, { threshold: 0.15 }).observe(deck);
+    }
+
+    // Manual shuffle button: reorder the deck, then replay the shuffle-in
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      const cards = [...deck.children];
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      cards.forEach(c => deck.appendChild(c));
+      layoutHand();
+      if (!reduceMotion) playShuffle();
+    });
+
+    // ===== DARK MODE TOGGLE =====
+    const themeBtn = document.getElementById("themeBtn");
+    try { if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark"); } catch (e) {}
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      try { localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light"); } catch (e) {}
+    });
+
+    // ===== TYPING EFFECT =====
+    const typing = document.getElementById("typing");
+    if (typing) {
+      const words = ["inquisitive cs student", "python & java developer", "aspiring data analyst", "training coordinator & tutor"];
+      let w = 0, c = 0, deleting = false;
+      function type() {
+        const word = words[w];
+        typing.textContent = word.substring(0, c);
+        if (!deleting && c < word.length) c++;
+        else if (!deleting) { deleting = true; return setTimeout(type, 1200); }
+        else if (c > 0) c--;
+        else { deleting = false; w = (w + 1) % words.length; }
+        setTimeout(type, deleting ? 50 : 100);
+      }
+      type();
+    }
+  </script>
+</body>
+</html>
