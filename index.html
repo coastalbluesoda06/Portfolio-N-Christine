@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>N Christine — CS Student · Data Analytics Internship</title>
+  <title>N Christine — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Almendra:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Almendra:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     /* ===== COLORS & THEME (soft off-white, confetti dots, charcoal ink) ===== */
     :root {
@@ -371,6 +371,65 @@
       .nav-side { justify-content: center !important; flex-wrap: wrap; gap: 8px; }
       button.nav-btn { padding: 6px 18px; font-size: .9rem; }
     }
+
+    /* ===== ABOUT: numbered-cards layout ===== */
+    .ab { max-width: 1100px; margin: 0 auto; }
+    .ab-head { display: flex; align-items: center; gap: 22px; margin: 6px 0 30px; }
+    .ab-title-wrap { display: flex; align-items: center; gap: 14px; }
+    .ab-num, .ab-label, .ab-card-title, .ab-k, .ab-row dt { font-family: "DM Mono", ui-monospace, Menlo, Consolas, monospace; }
+    .ab-num { font-size: .95rem; color: var(--muted); }
+    .ab-line { width: 30px; height: 1.5px; background: var(--muted); }
+    .ab-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -.02em; line-height: 1; }
+    .ab-card { background: var(--card); border: 1.5px solid var(--border); border-left: 5px solid var(--accent2); border-radius: 18px; padding: 24px 26px; box-shadow: 0 8px 20px var(--shadow); }
+    .ab-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; align-items: stretch; }
+    .ab-profile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+    .ab-photo { display: block; width: 100%; max-width: 320px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; }
+    .ab-name { font-family: var(--serif); font-weight: 500; font-size: 1.8rem; letter-spacing: -.01em; line-height: 1.1; }
+    .ab-profile .badge { margin: 0; text-align: left; }
+    .ab-card-title, .ab-label { font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .ab-card-title { margin-bottom: 8px; }
+    .ab-dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+    .ab-row { padding: 11px 0; border-bottom: 1.5px dashed var(--border); min-width: 0; }
+    .ab-row.wide { grid-column: 1 / -1; }
+    .ab-row dt { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .ab-row dd { font-size: 1.1rem; margin: 2px 0 0; overflow-wrap: anywhere; }
+    .ab-row a { text-decoration: underline; text-underline-offset: 3px; }
+    .ab-label { display: flex; align-items: center; gap: 14px; margin: 48px 0 16px; }
+    .ab-label::after { content: ""; flex: 1; height: 1.5px; background: var(--border); }
+    .ab-label.first { margin-top: 44px; }
+    .ab-mid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: start; }
+    .ab-bio p { font-size: 1.2rem; line-height: 1.75; margin: 0 0 16px; color: var(--text); }
+    .ab-bio .paper-rule { margin-top: 24px; }
+    .ab-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ab-mini { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border-radius: 14px; }
+    .ab-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "DM Mono", ui-monospace, monospace; font-size: .8rem; margin-top: 2px; }
+    .ab-k { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .ab-v { font-size: 1.08rem; line-height: 1.35; margin-top: 2px; }
+    .ab-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; padding: 26px 10px; border-radius: 26px; background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+    .ab-stat { text-align: center; padding: 0 12px; }
+    .ab-stat + .ab-stat { border-left: 1.5px solid color-mix(in srgb, var(--accent) 20%, transparent); }
+    .ab-big { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1.1; }
+    .ab-cap { color: var(--muted); font-size: 1rem; }
+    .ab-skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .ab-skill-head { display: flex; align-items: flex-start; gap: 12px; }
+    .ab-skill-head h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.25; letter-spacing: -.01em; }
+    .ab-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .ab-tags li { font-size: .98rem; padding: 3px 14px; border-radius: 30px; border: 1.5px solid var(--border); background: transparent; color: var(--text); }
+    .ab .connect { margin-top: 52px; }
+    @media (max-width: 900px) {
+      .ab-head { flex-direction: column; gap: 14px; }
+      .ab-top, .ab-mid, .ab-skills { grid-template-columns: 1fr; }
+      .ab-mid { gap: 0; }
+      .ab-dl { grid-template-columns: 1fr 1fr; gap: 0 20px; }
+      .ab-bio p { font-size: 1.12rem; }
+    }
+    @media (max-width: 520px) {
+      .ab-cards, .ab-dl { grid-template-columns: 1fr; }
+      .ab-stats { padding: 20px 4px; }
+      .ab-stat { padding: 0 6px; }
+      .ab-cap { font-size: .85rem; }
+      .ab-card { padding: 20px 18px; }
+    }
   </style>
 </head>
 <body>
@@ -415,7 +474,6 @@
           <img src="assets/photo.jpg" alt="N Christine profile photo" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 230 230%27%3E%3Crect width=%27230%27 height=%27230%27 fill=%27%23d9d9d6%27/%3E%3Ctext x=%2750%25%27 y=%2754%25%27 text-anchor=%27middle%27 font-family=%27Georgia,serif%27 font-size=%2772%27 fill=%27%234d2b12%27%3ENC%3C/text%3E%3C/svg%3E'" />
         </div>
         <div class="hero-text">
-          <p class="badge"><span class="dot"></span>CS student seeking a data analytics internship</p>
           <h1>let's<br>work<br>together!</h1>
           <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
           <div class="btn-row">
@@ -482,31 +540,79 @@
 
     <!-- ===== VIEW: ABOUT ===== -->
     <div id="view-about" class="page-view">
-      <div class="page-head">
-        <div data-card="about"></div>
-        <div><h1 class="page-title">about me</h1><p class="page-sub">the person behind the cards</p></div>
-      </div>
-      <div class="about-grid">
-        <figure class="about-photo"><img src="assets/about.jpg" alt="N Christine" /></figure>
-        <div class="about-right">
-          <ul class="glance">
-            <li>BS Computer Science</li><li>University of the Cordilleras</li><li>Python · Java</li>
-            <li>Analytics &amp; Visualization</li><li>3 yrs training coordinator</li><li>English · Burmese</li>
-            <li>Seeking: data analytics internship</li>
-          </ul>
-          <div class="paper">
-            <p>I'm a Computer Science student at the University of the Cordilleras, seeking a <strong>data analytics internship</strong>. I use Python, Java, and analytics to find patterns in data and turn them into tools that are simple and genuinely useful to the people who use them.</p>
+      <div class="ab">
+        <div class="ab-head">
+          <div data-card="about"></div>
+          <div class="ab-title-wrap"><span class="ab-num">01</span><span class="ab-line"></span><h1 class="ab-title">About Me</h1></div>
+        </div>
+
+        <div class="ab-top">
+          <section class="ab-card">
+            <h2 class="ab-card-title">Personal info</h2>
+            <dl class="ab-dl">
+              <div class="ab-row wide"><dt>Name</dt><dd>N Christine</dd></div>
+              <div class="ab-row"><dt>Birthday</dt><dd>April 19, 2006</dd></div>
+              <div class="ab-row"><dt>Age</dt><dd>20 years old</dd></div>
+              <div class="ab-row"><dt>Location</dt><dd>Yangon, Myanmar</dd></div>
+              <div class="ab-row"><dt>College</dt><dd>University of the Cordilleras</dd></div>
+              <div class="ab-row"><dt>Program</dt><dd>BS Computer Science</dd></div>
+              <div class="ab-row"><dt>Year level</dt><dd>1st year</dd></div>
+              <div class="ab-row"><dt>Status</dt><dd>College student</dd></div>
+              <div class="ab-row"><dt>Languages</dt><dd>English · Burmese</dd></div>
+              <div class="ab-row wide"><dt>Hobbies</dt><dd>Gaming · Sketching · Self-studying</dd></div>
+              <div class="ab-row"><dt>Email</dt><dd><a href="mailto:nhchristine725@gmail.com">nhchristine725@gmail.com</a></dd></div>
+              <div class="ab-row"><dt>GitHub</dt><dd><a href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">coastalbluesoda06</a></dd></div>
+            </dl>
+          </section>
+        </div>
+
+        <div class="ab-mid">
+          <section class="ab-bio">
+            <h2 class="ab-label first">More about me</h2>
+            <p>I'm a first-year Computer Science student at the University of the Cordilleras. I use Python, Java, and analytics to find patterns in data and turn them into tools that are simple and genuinely useful to the people who use them.</p>
             <p>Alongside my studies, I've spent three years as a training coordinator at a private school and run my own tutoring initiatives, turning topics from coding logic to math and science into clear, bite-sized lessons. That experience taught me to explain complex ideas simply, a skill I'm excited to bring to reporting and presenting data.</p>
             <p>Outside class, I explore linguistics and build digital study spaces. I learn fast, stay curious, and I'm ready to grow into an analyst who makes insights easy for anyone to understand.</p>
             <hr class="paper-rule" />
-          </div>
-          <div class="connect">
-            <h2 class="connect-title">connect with me!</h2>
-            <div class="btn-row">
-              <a class="btn primary" href="mailto:nhchristine725@gmail.com">gmail</a>
-              <a class="btn outline" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">github</a>
-              <button class="btn outline" onclick="showView('home')">← back to home</button>
+          </section>
+          <div>
+            <h2 class="ab-label first">At a glance</h2>
+            <div class="ab-cards">
+              <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Technical</div><div class="ab-v">Python · Java</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">Interested in</div><div class="ab-v">Analytics &amp; Visualization</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">Experience</div><div class="ab-v">Training coordinator &amp; tutor</div></div></div>
             </div>
+          </div>
+        </div>
+
+        <div class="ab-stats">
+          <div class="ab-stat"><div class="ab-big">1</div><div class="ab-cap">Degree in progress</div></div>
+          <div class="ab-stat"><div class="ab-big">3</div><div class="ab-cap">Years as training coordinator</div></div>
+          <div class="ab-stat"><div class="ab-big">3</div><div class="ab-cap">Skill areas</div></div>
+        </div>
+
+        <h2 class="ab-label">Skills</h2>
+        <div class="ab-skills">
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">1</span><h3>AI-Driven Development &amp; Code Comprehension</h3></div>
+            <ul class="ab-tags"><li>AI Tool Orchestration</li><li>Code Reading &amp; Environment Management</li><li>Algorithmic Fundamentals</li></ul>
+          </article>
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">2</span><h3>UI/UX &amp; Visual Design</h3></div>
+            <ul class="ab-tags"><li>Applied Human-Computer Interaction</li><li>Digital Branding</li></ul>
+          </article>
+          <article class="ab-card">
+            <div class="ab-skill-head"><span class="ab-n">3</span><h3>Technical Communication &amp; Leadership</h3></div>
+            <ul class="ab-tags"><li>Instructional Design</li><li>Professional Coordination</li></ul>
+          </article>
+        </div>
+
+        <div class="connect">
+          <h2 class="connect-title">connect with me!</h2>
+          <div class="btn-row">
+            <a class="btn primary" href="mailto:nhchristine725@gmail.com">gmail</a>
+            <a class="btn outline" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">github</a>
+            <button class="btn outline" onclick="showView('home')">← back to home</button>
           </div>
         </div>
       </div>
