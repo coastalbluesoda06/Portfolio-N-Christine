@@ -108,7 +108,7 @@
     }
     .hero-img img {
       width: 340px; height: 340px; object-fit: cover; border-radius: 50%;
-      filter: grayscale(1) contrast(1.05); display: block;
+      display: block;
     }
     .hero-text h1 {
       font-family: var(--serif); font-weight: 500;
@@ -398,36 +398,60 @@
     .ab-label::after { content: ""; flex: 1; height: 1.5px; background: var(--border); }
     .ab-label.first { margin-top: 44px; }
     .ab-mid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; align-items: start; }
-    .ab-bio p { font-size: 1.2rem; line-height: 1.75; margin: 0 0 16px; color: var(--text); }
+    .ab-bio p { font-size: 1.4rem; line-height: 1.75; margin: 0 0 18px; color: var(--text); }
     .ab-bio .paper-rule { margin-top: 24px; }
     .ab-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .ab-mini { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border-radius: 14px; }
     .ab-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: "DM Mono", ui-monospace, monospace; font-size: .8rem; margin-top: 2px; }
     .ab-k { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
     .ab-v { font-size: 1.08rem; line-height: 1.35; margin-top: 2px; }
-    .ab-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; padding: 26px 10px; border-radius: 26px; background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+    .ab-stats { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; margin: 28px 0 0; padding: 10px 8px; border-radius: 18px; background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
     .ab-stat { text-align: center; padding: 0 12px; }
     .ab-stat + .ab-stat { border-left: 1.5px solid color-mix(in srgb, var(--accent) 20%, transparent); }
-    .ab-big { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1.1; }
-    .ab-cap { color: var(--muted); font-size: 1rem; }
+    .ab-big { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; }
+    .ab-cap { color: var(--muted); font-size: .85rem; line-height: 1.25; }
     .ab-skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
     .ab-skill-head { display: flex; align-items: flex-start; gap: 12px; }
     .ab-skill-head h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.25; letter-spacing: -.01em; }
     .ab-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .ab-tags li { font-size: .98rem; padding: 3px 14px; border-radius: 30px; border: 1.5px solid var(--border); background: transparent; color: var(--text); }
     .ab .connect { margin-top: 52px; }
+    @media (min-width: 901px) {
+      .ab { max-width: 1180px; }
+      .ab-head { margin: 0 0 22px; gap: 16px; }
+      .ab-head [data-card] { zoom: .6; }
+      .ab-title { font-size: 3.2rem; }
+      .ab-top { grid-template-columns: minmax(0, 7.4fr) minmax(0, 4fr); gap: 36px; align-items: start; }
+      .ab-bio p { font-size: 1.28rem; line-height: 1.6; margin: 0 0 10px; }
+      .ab-bio .paper-rule { display: none; }
+      .ab-cards { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .ab-mini { padding: 14px 16px; }
+      .ab-v { font-size: 1.02rem; }
+      .ab-stats { margin-top: 14px; padding: 8px 8px; }
+      .ab-big { font-size: 1.7rem; }
+      .ab-cap { font-size: .85rem; }
+      .ab-label { margin: 14px 0 8px; }
+      .ab-skills { gap: 14px; }
+      .ab-skills .ab-card { padding: 12px 18px; }
+      .ab-skill-head h3 { font-size: 1.05rem; }
+      .ab-tags { margin-top: 10px; gap: 6px; }
+      .ab-tags li { font-size: .88rem; padding: 2px 11px; }
+      .ab .connect { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; text-align: left; }
+      .ab .connect .connect-title { font-size: 2rem; }
+      .ab .connect .btn-row { margin-top: 0; }
+    }
     @media (max-width: 900px) {
       .ab-head { flex-direction: column; gap: 14px; }
       .ab-top, .ab-mid, .ab-skills { grid-template-columns: 1fr; }
       .ab-mid { gap: 0; }
       .ab-dl { grid-template-columns: 1fr 1fr; gap: 0 20px; }
-      .ab-bio p { font-size: 1.12rem; }
+      .ab-bio p { font-size: 1.3rem; }
     }
     @media (max-width: 520px) {
       .ab-cards, .ab-dl { grid-template-columns: 1fr; }
-      .ab-stats { padding: 20px 4px; }
+      .ab-stats { padding: 10px 4px; }
       .ab-stat { padding: 0 6px; }
-      .ab-cap { font-size: .85rem; }
+      .ab-cap { font-size: .78rem; }
       .ab-card { padding: 20px 18px; }
     }
   </style>
@@ -547,41 +571,19 @@
         </div>
 
         <div class="ab-top">
-          <section class="ab-card">
-            <h2 class="ab-card-title">Personal info</h2>
-            <dl class="ab-dl">
-              <div class="ab-row wide"><dt>Name</dt><dd>N Christine</dd></div>
-              <div class="ab-row"><dt>Birthday</dt><dd>April 19, 2006</dd></div>
-              <div class="ab-row"><dt>Age</dt><dd>20 years old</dd></div>
-              <div class="ab-row"><dt>Location</dt><dd>Yangon, Myanmar</dd></div>
-              <div class="ab-row"><dt>College</dt><dd>University of the Cordilleras</dd></div>
-              <div class="ab-row"><dt>Program</dt><dd>BS Computer Science</dd></div>
-              <div class="ab-row"><dt>Year level</dt><dd>1st year</dd></div>
-              <div class="ab-row"><dt>Status</dt><dd>College student</dd></div>
-              <div class="ab-row"><dt>Languages</dt><dd>English · Burmese</dd></div>
-              <div class="ab-row wide"><dt>Hobbies</dt><dd>Gaming · Sketching · Self-studying</dd></div>
-              <div class="ab-row"><dt>Email</dt><dd><a href="mailto:nhchristine725@gmail.com">nhchristine725@gmail.com</a></dd></div>
-              <div class="ab-row"><dt>GitHub</dt><dd><a href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">coastalbluesoda06</a></dd></div>
-            </dl>
-          </section>
-        </div>
-
-        <div class="ab-mid">
           <section class="ab-bio">
-            <h2 class="ab-label first">More about me</h2>
             <p>I'm a first-year Computer Science student at the University of the Cordilleras. I use Python, Java, and analytics to find patterns in data and turn them into tools that are simple and genuinely useful to the people who use them.</p>
             <p>Alongside my studies, I've spent three years as a training coordinator at a private school and run my own tutoring initiatives, turning topics from coding logic to math and science into clear, bite-sized lessons. That experience taught me to explain complex ideas simply, a skill I'm excited to bring to reporting and presenting data.</p>
             <p>Outside class, I explore linguistics and build digital study spaces. I learn fast, stay curious, and I'm ready to grow into an analyst who makes insights easy for anyone to understand.</p>
             <hr class="paper-rule" />
           </section>
-          <div>
-            <h2 class="ab-label first">At a glance</h2>
-            <div class="ab-cards">
-              <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Technical</div><div class="ab-v">Python · Java</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">Interested in</div><div class="ab-v">Analytics &amp; Visualization</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">Experience</div><div class="ab-v">Training coordinator &amp; tutor</div></div></div>
-            </div>
+          <div class="ab-cards">
+            <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Birthday</div><div class="ab-v">April 19, 2006 · 20 years old</div></div></div>
+            <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Location</div><div class="ab-v">Yangon, Myanmar</div></div></div>
+            <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">College</div><div class="ab-v">University of the Cordilleras<br>BS Computer Science · 1st year</div></div></div>
+            <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">Hobbies</div><div class="ab-v">Gaming · Sketching · Self-studying</div></div></div>
+            <div class="ab-card ab-mini"><span class="ab-n">5</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
+            <div class="ab-card ab-mini"><span class="ab-n">6</span><div><div class="ab-k">Technical</div><div class="ab-v">Python · Java</div></div></div>
           </div>
         </div>
 
@@ -606,6 +608,7 @@
             <ul class="ab-tags"><li>Instructional Design</li><li>Professional Coordination</li></ul>
           </article>
         </div>
+
 
         <div class="connect">
           <h2 class="connect-title">connect with me!</h2>
@@ -752,7 +755,40 @@
 
       const target = document.getElementById('view-' + viewName) || document.getElementById('view-coming-soon');
       target.classList.add('active');
+      fitAbout();
     }
+
+    // Shrink the About page on desktop so all of it fits in one screen (no scrolling)
+    function fitAbout() {
+      const ab = document.querySelector('#view-about .ab');
+      if (!ab) return;
+      ab.style.zoom = ''; ab.style.maxWidth = '';
+      const view = document.getElementById('view-about');
+      if (!view.classList.contains('active') || window.innerWidth < 901) return;
+      let z = 1;
+      for (let i = 0; i < 10; i++) {
+        const abH = ab.getBoundingClientRect().height / z;
+        const mainEl = document.querySelector('main');
+        const other = ab.getBoundingClientRect().top + window.scrollY
+          + parseFloat(getComputedStyle(mainEl).paddingBottom) + document.querySelector('footer').offsetHeight;
+        const next = Math.min(1, Math.max(0.55, (window.innerHeight - other - 6) / abH));
+        if (Math.abs(next - z) < 0.005 && i) break;
+        z = next;
+        ab.style.zoom = z.toFixed(3);
+        // use the extra width the smaller scale frees up, so text wraps less and the page gets shorter
+        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+      }
+      // safety: shave the scale until nothing scrolls
+      while (document.documentElement.scrollHeight > window.innerHeight + 1 && z > 0.5) {
+        z -= 0.01;
+        ab.style.zoom = z.toFixed(3);
+        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+      }
+      if (z >= 0.999) { ab.style.zoom = ''; ab.style.maxWidth = ''; }
+    }
+    window.addEventListener('resize', fitAbout);
+    window.addEventListener('load', fitAbout);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAbout);
 
     // ===== PAGE TRANSITION =====
     const VIEWS = {
