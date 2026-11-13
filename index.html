@@ -411,6 +411,7 @@
 
     /* ===== ACHIEVEMENTS: experience-style cards, 3 columns, one screen on desktop ===== */
     .ach { max-width: 1100px; margin: 0 auto; }
+    .ach .ab-head { margin-bottom: 6px; }
     .xp-item { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 6px; align-items: stretch; }
     .xp-rail { position: relative; }
     .xp-rail::before { content: ""; position: absolute; left: 11px; top: 40px; bottom: 0; border-left: 2px dashed var(--border); }
@@ -444,7 +445,7 @@
     @media (max-width: 1000px) { .xps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 640px) { .xps { grid-template-columns: 1fr; } }
     @media (min-width: 901px) {
-      body:has(#view-education.active) main { padding-top: 6px; padding-bottom: 0; }
+      body:has(#view-education.active) main { padding-top: 6px; padding-bottom: 0; padding-left: 2.5%; padding-right: 2.5%; max-width: none; }
       body:has(#view-education.active) footer { padding: 6px; font-size: .85rem; }
       .ach { max-width: 1280px; }
       .xp-hint { margin: 0 0 10px; }
@@ -469,6 +470,7 @@
     .ab-num, .ab-label, .ab-card-title, .ab-k, .ab-row dt { font-family: "DM Mono", ui-monospace, Menlo, Consolas, monospace; }
     .ab-num { font-size: .95rem; color: var(--muted); }
     .ab-line { width: 30px; height: 1.5px; background: var(--muted); }
+    .ab-head { zoom: calc(.8 / var(--fz, 1)); }
     .ab-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: -.02em; line-height: 1; }
     .nw { white-space: nowrap; }
     .ab-id { display: flex; align-items: center; gap: 22px; margin-bottom: 16px; }
@@ -522,9 +524,11 @@
     .ab-sub { font-family: var(--hand); font-size: 1.5rem; color: var(--muted); margin-left: 10px; white-space: nowrap; }
     @media (max-width: 700px) { .ab-title-wrap { flex-wrap: wrap; justify-content: center; row-gap: 4px; } .ab-sub { flex-basis: 100%; text-align: center; margin-left: 0; white-space: normal; font-size: 1.25rem; } }
     .ab .back-row { margin-top: 20px; }
+    #view-about .back-row { margin-top: 20px; }
+    @media (min-width: 901px) { #view-about .back-row { margin-top: 12px; padding-bottom: 4px; } }
 
     /* achievements on a horizontal timeline, oldest to newest */
-    .tl { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); grid-template-rows: auto 108px auto; column-gap: 14px; position: relative; }
+    .tl { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: auto 88px auto; column-gap: 12px; position: relative; }
     .tl::before { content: ""; grid-row: 2; grid-column: 1 / -1; align-self: center; height: 3px; background: var(--accent); border-radius: 2px; }
     .tl::after { content: ""; grid-row: 2; grid-column: 1 / -1; align-self: center; height: 16px; margin-right: -6px;
       background: linear-gradient(to bottom left, transparent 50%, var(--accent) 50%) right top / 14px 50% no-repeat,
@@ -532,14 +536,15 @@
       pointer-events: none; transform-origin: right center; }
     .tl-item { grid-column: var(--c) / span 2; grid-row: 1 / 4; display: grid; grid-template-rows: subgrid; position: relative; z-index: 1; }
     .tl-item .xp { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
-    .tl-item.up .xp { grid-row: 1; align-self: end; }
-    .tl-item.down .xp { grid-row: 3; align-self: start; }
+    .tl-item.up .xp { grid-row: 1; align-self: stretch; }
+    .tl-item.down .xp { grid-row: 3; align-self: stretch; }
     /* neighbouring timeline items overlap by one grid column, so only the cards themselves take clicks */
     .tl-item { pointer-events: none; }
     .tl-item .xp { pointer-events: auto; }
     .tl-pt { grid-row: 2; position: relative; }
     .tl-node { position: absolute; left: 25%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border: 3px solid var(--accent); border-radius: 4px; background: var(--bg); transform: rotate(45deg); }
     .tl-stem { position: absolute; left: 25%; margin-left: -1px; width: 2px; background: var(--accent); }
+    .tl-item.down .tl-node, .tl-item.down .tl-stem, .tl-item.down .tl-label { left: 75%; }
     .tl-item.up .tl-stem { bottom: 50%; height: 50%; }
     .tl-item.down .tl-stem { top: 50%; height: 50%; }
     .tl-label { position: absolute; left: 25%; transform: translateX(-50%); white-space: nowrap; font-family: "DM Mono", ui-monospace, monospace; font-size: .86rem; color: var(--text); font-weight: 500; }
@@ -551,10 +556,14 @@
     .live-dot { width: 9px; height: 9px; border-radius: 50%; background: #5fa35a; box-shadow: 0 0 0 3px rgba(95, 163, 90, .25); animation: livePulse 1.8s ease-in-out infinite; }
     @keyframes livePulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(95, 163, 90, .25); } 50% { box-shadow: 0 0 0 6px rgba(95, 163, 90, .08); } }
     @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
-    .tl .xp p { font-size: 1.1rem; line-height: 1.4; }
-    .tl .xp h3 { font-size: 1.5rem; }
-    .tl .xp-org { font-size: 1.12rem; }
-    .tl .xp-ico { width: 16px; height: 16px; }
+    .tl .xp p { font-size: 1.24rem; line-height: 1.4; }
+    .tl .xp h3 { font-size: 1.68rem; }
+    .tl .xp-org { font-size: 1.26rem; }
+    .tl .xp-ico { width: 18px; height: 18px; }
+    .tl .xp { padding: 14px 16px; gap: 12px; }
+    .tl .xp .cert-thumb { width: 92px; }
+    .tl .xp.wide .cert-thumb { width: 112px; }
+    .tl .xp .xp-logo-btn .xp-logo { height: 100px; }
     .tl-label { font-size: .96rem; }
     @media (max-width: 900px) {
       .tl { display: block; padding-left: 30px; }
@@ -563,7 +572,7 @@
       .tl::before { animation-name: lineDown !important; transform-origin: top !important; }
       .tl-item { display: block; margin-bottom: 18px; }
       .tl-pt { position: absolute; left: -30px; top: 22px; width: 20px; height: 20px; }
-      .tl-node { left: 10px; }
+      .tl-node, .tl-item.down .tl-node { left: 10px; }
       .tl-stem, .tl-label { display: none; }
       .tl .xp-year { display: inline; }
     }
@@ -604,7 +613,6 @@
     /* contact button pinned to the top-right corner of the page (desktop) */
     @media (min-width: 901px) {
       .navbar { padding-left: 28px; padding-right: 28px; }
-      #nav-contact { margin-left: auto; }
     }
     @media (min-width: 901px) {
       .ab { max-width: 1280px; }
@@ -685,7 +693,6 @@
       <button class="nav-btn" id="nav-education" onclick="showView('education')">achievements</button>
       <button class="nav-btn" id="nav-family" onclick="showView('family')">family</button>
       <button id="themeBtn" class="theme-btn" aria-label="Toggle dark mode"><svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
-      <button class="nav-btn" id="nav-contact" onclick="showView('contact')">contact</button>
     </div>
   </header>
 
@@ -700,7 +707,7 @@
           <h1>let's<br>work<br>together!</h1>
           <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
           <div class="btn-row">
-            <button class="btn primary" onclick="showView('contact')">contact me</button>
+            <a class="btn primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">contact me</a>
             <button type="button" class="btn outline" data-copy="nhchristine725@gmail.com" title="Click to copy"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span class="copy-label">nhchristine725@gmail.com</span></button>
           </div>
         </div>
@@ -733,15 +740,6 @@
           <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-family"/></svg></div>
           <div>
             <div class="card-title-text">family</div>
-            <div class="card-badge">Open</div>
-          </div>
-        </div>
-
-        <div class="nav-card" onclick="showView('contact')">
-          <div class="card-corner">10<span class="card-suit">♠</span></div>
-          <div class="card-center"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div>
-          <div>
-            <div class="card-title-text">contact</div>
             <div class="card-badge">Open</div>
           </div>
         </div>
@@ -810,11 +808,10 @@
         </div>
 
 
-        <div class="back-row">
-          <button class="btn outline" onclick="showView('home')"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>back to home</button>
-          <button class="btn outline" onclick="showView('home')">← previous</button>
-          <button class="btn primary" onclick="showView('education')">continue →</button>
-        </div>
+      </div>
+      <div class="back-row">
+        <button class="btn outline" onclick="showView('home')">← previous</button>
+        <button class="btn primary" onclick="showView('education')">continue →</button>
       </div>
     </div>
 
@@ -840,7 +837,7 @@
           </article>
           <div class="tl-pt" aria-hidden="true"><span class="tl-stem"></span><span class="tl-node"></span><span class="tl-label">2015 – 2016</span></div>
         </li>
-                <li class="tl-item down" style="--c:2">
+                <li class="tl-item down" style="--c:1">
           <article class="xp">
             <div class="xp-body">
               <div class="xp-top"><span class="xp-year">2019</span></div>
@@ -866,7 +863,7 @@
           </article>
           <div class="tl-pt" aria-hidden="true"><span class="tl-stem"></span><span class="tl-node"></span><span class="tl-label">2024</span></div>
         </li>
-        <li class="tl-item down" style="--c:4">
+        <li class="tl-item down" style="--c:3">
           <article class="xp">
             <div class="xp-body">
               <div class="xp-top"><span class="xp-year">2024 – 2025</span></div>
@@ -892,7 +889,7 @@
           </article>
           <div class="tl-pt" aria-hidden="true"><span class="tl-stem"></span><span class="tl-node"></span><span class="tl-label">2026</span></div>
         </li>
-        <li class="tl-item down" style="--c:6">
+        <li class="tl-item down" style="--c:5">
           <article class="xp">
             <div class="xp-body">
               <div class="xp-top"><span class="xp-year">2026 – present</span><span class="xp-live"><span class="live-dot"></span>currently attending</span></div>
@@ -918,7 +915,7 @@
           </article>
           <div class="tl-pt" aria-hidden="true"><span class="tl-stem"></span><span class="tl-node"></span><span class="tl-label">2026</span></div>
         </li>
-        <li class="tl-item down" style="--c:8">
+        <li class="tl-item down" style="--c:7">
           <article class="xp">
             <div class="xp-body">
               <div class="xp-top"><span class="xp-year">Ongoing</span></div>
@@ -931,11 +928,11 @@
           <div class="tl-pt" aria-hidden="true"><span class="tl-stem"></span><span class="tl-node"></span><span class="tl-label">2025 – present</span></div>
         </li>
       </ol>
-      <div class="back-row">
+     </div>
+     <div class="back-row">
         <button class="btn outline" onclick="showView('home')"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>back to home</button>
         <button class="btn outline" onclick="showView('about')">← previous</button>
         <button class="btn primary" onclick="showView('family')">continue →</button>
-      </div>
      </div>
     </div>
 
@@ -963,33 +960,6 @@
         <div class="back-row">
           <button class="btn outline" onclick="showView('home')"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>back to home</button>
           <button class="btn outline" onclick="showView('education')">← previous</button>
-          <button class="btn primary" onclick="showView('contact')">continue →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== VIEW 2: CONTACT PAGE ===== -->
-    <div id="view-contact" class="page-view">
-      <div class="page-head">
-        <div data-card="contact"></div>
-        <div><h1 class="page-title">contact</h1><p class="page-sub">say hi, any time</p></div>
-      </div>
-      <div class="contact-container">
-        <h2>let's work together!</h2>
-        <p>I'm open to opportunities, collaborations, and queries. Feel free to reach out via email or check out my work on GitHub!</p>
-
-        <div class="contact-links">
-          <a class="contact-card-btn" href="mailto:nhchristine725@gmail.com">
-            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email me
-          </a>
-          <a class="contact-card-btn" href="https://github.com/coastalbluesoda06" target="_blank" rel="noopener">
-            <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub profile
-          </a>
-        </div>
-
-        <div class="back-row">
-          <button class="btn outline" onclick="showView('home')"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>back to home</button>
-          <button class="btn outline" onclick="showView('family')">← previous</button>
         </div>
       </div>
     </div>
@@ -1002,7 +972,7 @@
         <p class="cs-subtitle" id="cs-subtitle">This portfolio page is currently being crafted and will be revealed soon!</p>
         <div class="btn-row">
           <button class="btn primary" onclick="showView('home')">back to home</button>
-          <button class="btn outline" onclick="showView('contact')">contact me</button>
+          <a class="btn outline" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">contact me</a>
         </div>
       </div>
     </div>
@@ -1046,36 +1016,40 @@
 
     // Shrink the About and Achievements pages on desktop so all of each fits in one screen (no scrolling)
     function fitAbout() {
-      fitToScreen('view-about', '#view-about .ab');
-      fitToScreen('view-education', '#view-education .ach');
+      fitToScreen('view-about', '#view-about .ab', '#view-about .back-row');
+      fitToScreen('view-education', '#view-education .ach', '#view-education .back-row', 0.4);
     }
-    function fitToScreen(viewId, sel) {
+    function fitToScreen(viewId, sel, extraSel, minZ = 0.55) {
       const ab = document.querySelector(sel);
       if (!ab) return;
       // zoom-to-fit ENABLED so the About page fits in one screen
-      ab.style.zoom = ''; ab.style.maxWidth = '';
+      ab.style.zoom = ''; ab.style.maxWidth = ''; ab.style.setProperty('--fz', 1);
       const view = document.getElementById(viewId);
       if (!view.classList.contains('active') || window.innerWidth < 901) return;
       let z = 1;
+      const mainBox = document.querySelector('main'), mainCS = getComputedStyle(mainBox);
+      const availW = mainBox.clientWidth - parseFloat(mainCS.paddingLeft) - parseFloat(mainCS.paddingRight);
+      const extraEl = extraSel ? document.querySelector(extraSel) : null;
+      const extraH = extraEl ? extraEl.offsetHeight + parseFloat(getComputedStyle(extraEl).marginTop) + parseFloat(getComputedStyle(extraEl).marginBottom) : 0;
       for (let i = 0; i < 10; i++) {
         const abH = ab.getBoundingClientRect().height / z;
         const mainEl = document.querySelector('main');
-        const other = ab.getBoundingClientRect().top + window.scrollY
+        const other = ab.getBoundingClientRect().top + window.scrollY + extraH
           + parseFloat(getComputedStyle(mainEl).paddingBottom) + document.querySelector('footer').offsetHeight;
-        const next = Math.min(1, Math.max(0.55, (window.innerHeight - other - 6) / abH));
+        const next = Math.min(1, Math.max(minZ, (window.innerHeight - other - 6) / abH));
         if (Math.abs(next - z) < 0.005 && i) break;
         z = next;
-        ab.style.zoom = z.toFixed(3);
+        ab.style.zoom = z.toFixed(3); ab.style.setProperty('--fz', z.toFixed(3));
         // use the extra width the smaller scale frees up, so text wraps less and the page gets shorter
-        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+        ab.style.maxWidth = Math.min(1900, availW / z) + 'px';
       }
       // safety: shave the scale until nothing scrolls
-      while (document.documentElement.scrollHeight > window.innerHeight + 1 && z > 0.5) {
+      while (document.documentElement.scrollHeight > window.innerHeight + 1 && z > minZ) {
         z -= 0.01;
-        ab.style.zoom = z.toFixed(3);
-        ab.style.maxWidth = Math.min(1700, (window.innerWidth * 0.94) / z) + 'px';
+        ab.style.zoom = z.toFixed(3); ab.style.setProperty('--fz', z.toFixed(3));
+        ab.style.maxWidth = Math.min(1900, availW / z) + 'px';
       }
-      if (z >= 0.999) { ab.style.zoom = ''; ab.style.maxWidth = ''; }
+      if (z >= 0.999) { ab.style.zoom = ''; ab.style.maxWidth = ''; ab.style.setProperty('--fz', 1); }
     }
     // Achievements: stagger index so the entries appear one by one
     document.querySelectorAll('#view-education .tl-item').forEach((el, i) => el.style.setProperty('--i', i));
@@ -1089,13 +1063,12 @@
       home:     { rank: 'A',  suit: '♠', icon: 'home',  title: 'home' },
       about:    { rank: 'J',  suit: '♦', icon: 'user',  title: 'personal information' },
       education: { rank: 'K',  suit: '♣', icon: 'grad',  title: 'achievements' },
-      family:   { rank: 'Q',  suit: '♥', icon: 'family', title: 'family' },
-      contact:  { rank: '10', suit: '♠', icon: 'mail',  title: 'contact' }
+      family:   { rank: 'Q',  suit: '♥', icon: 'family', title: 'family' }
     };
     let currentView = 'home', busy = false;
 
     function pickRandomCard() {
-      const availableViews = ['about', 'education', 'family', 'contact'];
+      const availableViews = ['about', 'education', 'family'];
       const randomView = availableViews[Math.floor(Math.random() * availableViews.length)];
       showView(randomView);
     }
