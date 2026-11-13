@@ -548,8 +548,8 @@
     .tl-item.up .tl-stem { bottom: 50%; height: 50%; }
     .tl-item.down .tl-stem { top: 50%; height: 50%; }
     .tl-label { position: absolute; left: 25%; transform: translateX(-50%); white-space: nowrap; font-family: "DM Mono", ui-monospace, monospace; font-size: .86rem; color: var(--text); font-weight: 500; }
-    .tl-item.up .tl-label { top: calc(50% + 22px); }
-    .tl-item.down .tl-label { bottom: calc(50% + 22px); }
+    .tl-item.up .tl-label { bottom: calc(50% + 10px); left: calc(25% + 14px); transform: none; }
+    .tl-item.down .tl-label { top: calc(50% + 10px); left: calc(75% - 14px); transform: translateX(-100%); }
     .tl .xp-year { display: none; }
     .tl .xp-top:not(:has(.xp-live)) { display: none; }
     .xp-live { display: inline-flex; align-items: center; gap: 7px; font-size: .82rem; font-weight: 500; padding: 1px 12px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
