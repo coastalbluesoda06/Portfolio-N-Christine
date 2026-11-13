@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>N Christine — Portfolio</title>
   <meta name="description" content="Portfolio of N Christine, first-year BS Computer Science student at the University of the Cordilleras." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234d2b12'/%3E%3Ctext x='32' y='43' font-size='34' text-anchor='middle' fill='%23d6e8d0' font-family='Georgia,serif'%3EN%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:," />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Almendra:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -542,6 +542,7 @@
     .tl-item.up .tl-label { top: calc(50% + 22px); }
     .tl-item.down .tl-label { bottom: calc(50% + 22px); }
     .tl .xp-year { display: none; }
+    .tl .xp-top:not(:has(.xp-live)) { display: none; }
     .xp-live { display: inline-flex; align-items: center; gap: 7px; font-size: .82rem; font-weight: 500; padding: 1px 12px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
     .live-dot { width: 9px; height: 9px; border-radius: 50%; background: #5fa35a; box-shadow: 0 0 0 3px rgba(95, 163, 90, .25); animation: livePulse 1.8s ease-in-out infinite; }
     @keyframes livePulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(95, 163, 90, .25); } 50% { box-shadow: 0 0 0 6px rgba(95, 163, 90, .08); } }
@@ -692,7 +693,7 @@
           <p class="caption">N Christine <span class="star">★</span> <span id="typing"></span><span class="cursor">|</span></p>
           <div class="btn-row">
             <button class="btn primary" onclick="showView('contact')">contact me</button>
-            <a class="btn outline" href="mailto:nhchristine725@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>nhchristine725@gmail.com</a>
+            <button type="button" class="btn outline" data-copy="nhchristine725@gmail.com" title="Click to copy"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span class="copy-label">nhchristine725@gmail.com</span></button>
           </div>
         </div>
       </section>
@@ -821,7 +822,7 @@
         <li class="tl-item up" style="--c:1">
           <article class="xp">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">2015 – 2016</span><span class="xp-tag">Award</span></div>
+              <div class="xp-top"><span class="xp-year">2015 – 2016</span></div>
               <h3>Outstanding Student Award</h3>
               <div class="xp-org">Grade 4 · Primary School, Thanlyin</div>
               <p>School award for being an outstanding student in Grade 4.</p>
@@ -833,7 +834,7 @@
         <li class="tl-item down" style="--c:2">
           <article class="xp wide">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">2024</span><span class="xp-tag">Credential</span></div>
+              <div class="xp-top"><span class="xp-year">2024</span></div>
               <h3>High School Equivalency (GED)</h3>
               <div class="xp-org">Office of the State Superintendent of Education · Washington, D.C.</div>
               <p>Passed all four GED subjects with a total score of 703, above 700, and my highest subject score of 182 in Social Studies.</p>
@@ -845,7 +846,7 @@
         <li class="tl-item up" style="--c:3">
           <article class="xp">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">2024 – 2026</span><span class="xp-tag">Certificate</span></div>
+              <div class="xp-top"><span class="xp-year">2024 – 2026</span></div>
               <h3>Training Coordinator</h3>
               <div class="xp-org">BTC Private School · Myitkyina</div>
               <p>Certificate of Acknowledgement for 1+ year of experience coordinating trainings and helping others learn.</p>
@@ -857,7 +858,7 @@
         <li class="tl-item down" style="--c:4">
           <article class="xp">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">2026</span><span class="xp-tag">Achievement</span><span class="xp-new">★ latest</span></div>
+              <div class="xp-top"><span class="xp-year">2026</span></div>
               <h3>Certificate of Achievement</h3>
               <div class="xp-org">BTC Myitkyina @ Gloryland Star</div>
               <p>Recognized for outstanding work ethic and dedication to the team as Training Coordinator in March 2026.</p>
@@ -869,7 +870,7 @@
         <li class="tl-item up" style="--c:5">
           <article class="xp">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">2026 – present</span><span class="xp-tag">Education</span><span class="xp-live"><span class="live-dot"></span>currently attending</span></div>
+              <div class="xp-top"><span class="xp-year">2026 – present</span><span class="xp-live"><span class="live-dot"></span>currently attending</span></div>
               <h3>BS in Computer Science</h3>
               <div class="xp-org">University of the Cordilleras</div>
               <p>Focus areas: Python, Java, and analytics &amp; visualization.</p>
@@ -881,7 +882,7 @@
         <li class="tl-item down" style="--c:6">
           <article class="xp">
             <div class="xp-body">
-              <div class="xp-top"><span class="xp-year">Ongoing</span><span class="xp-tag">Initiative</span></div>
+              <div class="xp-top"><span class="xp-year">Ongoing</span></div>
               <h3>Educational tutoring initiatives</h3>
               <div class="xp-org">Self-run · Tintin’s Puddings on Telegram</div>
               <p>Sharing GED practice questions and study tips with over 900 subscribers.</p>
@@ -1273,6 +1274,26 @@
       }
       type();
     }
+  
+    // click the email on the home page to copy it
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.dataset.copy;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (e) {
+          const t = document.createElement('textarea');
+          t.value = text; t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          t.remove();
+        }
+        const label = btn.querySelector('.copy-label');
+        label.textContent = 'Copied!';
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => { label.textContent = text; }, 1600);
+      });
+    });
   </script>
 </body>
 </html>
