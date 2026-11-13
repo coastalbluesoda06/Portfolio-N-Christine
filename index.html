@@ -520,9 +520,12 @@
     .ab .back-row { margin-top: 20px; }
 
     /* achievements on a horizontal timeline, oldest to newest */
-    .tl { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: auto 64px auto; column-gap: 14px; position: relative; }
+    .tl { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: auto 108px auto; column-gap: 14px; position: relative; }
     .tl::before { content: ""; grid-row: 2; grid-column: 1 / -1; align-self: center; height: 3px; background: var(--accent); border-radius: 2px; }
-    .tl::after { content: ""; grid-row: 2; grid-column: 7; justify-self: end; align-self: center; margin-right: -6px; border-left: 14px solid var(--accent); border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+    .tl::after { content: ""; grid-row: 2; grid-column: 1 / -1; align-self: center; height: 16px; margin-right: -6px;
+      background: linear-gradient(to bottom left, transparent 50%, var(--accent) 50%) right top / 14px 50% no-repeat,
+                  linear-gradient(to top left, transparent 50%, var(--accent) 50%) right bottom / 14px 50% no-repeat;
+      pointer-events: none; transform-origin: right center; }
     .tl-item { grid-column: var(--c) / span 2; grid-row: 1 / 4; display: grid; grid-template-rows: subgrid; position: relative; z-index: 1; }
     .tl-item .xp { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
     .tl-item.up .xp { grid-row: 1; align-self: end; }
@@ -533,11 +536,11 @@
     .tl-pt { grid-row: 2; position: relative; }
     .tl-node { position: absolute; left: 25%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border: 3px solid var(--accent); border-radius: 4px; background: var(--bg); transform: rotate(45deg); }
     .tl-stem { position: absolute; left: 25%; margin-left: -1px; width: 2px; background: var(--accent); }
-    .tl-item.up .tl-stem { bottom: 50%; height: 32px; }
-    .tl-item.down .tl-stem { top: 50%; height: 32px; }
+    .tl-item.up .tl-stem { bottom: 50%; height: 50%; }
+    .tl-item.down .tl-stem { top: 50%; height: 50%; }
     .tl-label { position: absolute; left: 25%; transform: translateX(-50%); white-space: nowrap; font-family: "DM Mono", ui-monospace, monospace; font-size: .86rem; color: var(--text); font-weight: 500; }
-    .tl-item.up .tl-label { top: calc(50% + 14px); }
-    .tl-item.down .tl-label { bottom: calc(50% + 14px); }
+    .tl-item.up .tl-label { top: calc(50% + 22px); }
+    .tl-item.down .tl-label { bottom: calc(50% + 22px); }
     .tl .xp-year { display: none; }
     .xp-live { display: inline-flex; align-items: center; gap: 7px; font-size: .82rem; font-weight: 500; padding: 1px 12px; border-radius: 30px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
     .live-dot { width: 9px; height: 9px; border-radius: 50%; background: #5fa35a; box-shadow: 0 0 0 3px rgba(95, 163, 90, .25); animation: livePulse 1.8s ease-in-out infinite; }
@@ -548,6 +551,7 @@
       .tl { display: block; padding-left: 30px; }
       .tl::before { position: absolute; left: 9px; top: 6px; bottom: 6px; width: 3px; height: auto; }
       .tl::after { display: none; }
+      .tl::before { animation-name: lineDown !important; transform-origin: top !important; }
       .tl-item { display: block; margin-bottom: 18px; }
       .tl-pt { position: absolute; left: -30px; top: 22px; width: 20px; height: 20px; }
       .tl-node { left: 10px; }
@@ -555,9 +559,39 @@
       .tl .xp-year { display: inline; }
     }
     /* achievements deal in one by one */
-.ach .tl-item { animation: xpIn .7s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i, 0) * .22s + .05s); }
-    @keyframes xpIn { from { opacity: 0; transform: translateY(28px) rotate(-1.8deg) scale(.96); } to { opacity: 1; transform: none; } }
-    @media (prefers-reduced-motion: reduce) { .ach .tl-item { animation: none; } }
+/* arrow is "shot" left to right, then entries drop in from above / rise from below */
+    .ach .tl::before { transform-origin: left center; animation: lineShoot .85s cubic-bezier(.12, .8, .2, 1) both; }
+    .ach .tl::after { animation: arrowShoot .85s cubic-bezier(.12, .8, .2, 1) both, arrowShake .5s ease-out .85s both; }
+    @keyframes lineShoot { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes lineDown { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes arrowShoot { from { translate: -100% 0; } to { translate: 0 0; } }
+    @keyframes arrowShake { 0% { rotate: 0deg; } 20% { rotate: -5deg; } 45% { rotate: 3.5deg; } 70% { rotate: -1.5deg; } 100% { rotate: 0deg; } }
+    .ach .tl-item { animation-duration: .7s; animation-timing-function: cubic-bezier(.2, .85, .25, 1.05); animation-fill-mode: both; animation-delay: calc(var(--i, 0) * .2s + .8s); }
+    .ach .tl-item.up { animation-name: xpDrop; }
+    .ach .tl-item.down { animation-name: xpRise; }
+    @keyframes xpDrop { from { opacity: 0; transform: translateY(-70px) rotate(1.5deg) scale(.96); } to { opacity: 1; transform: none; } }
+    @keyframes xpRise { from { opacity: 0; transform: translateY(70px) rotate(-1.5deg) scale(.96); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .ach .tl::before, .ach .tl::after, .ach .tl-item { animation: none !important; } }
+
+    /* personal information: staggered entrance */
+    #view-about.active .ab-head { animation: abSlideDown .6s cubic-bezier(.2,.8,.2,1) both; }
+    #view-about.active .ab-id img { animation: abPop .75s cubic-bezier(.3,1.4,.4,1) .15s both; }
+    #view-about.active .ab-id-name, #view-about.active .ab-id-sub { animation: abSlideRight .6s cubic-bezier(.2,.8,.2,1) .3s both; }
+    #view-about.active .ab-bio p { animation: abSlideRight .65s cubic-bezier(.2,.8,.2,1) both; }
+    #view-about.active .ab-bio p:nth-of-type(1) { animation-delay: .4s; }
+    #view-about.active .ab-bio p:nth-of-type(2) { animation-delay: .55s; }
+    #view-about.active .ab-bio p:nth-of-type(3) { animation-delay: .7s; }
+    #view-about.active .ab-cards .ab-card { animation: abFlipIn .6s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--k, 0) * .08s + .45s); }
+    #view-about.active .ab-stats { animation: abRiseIn .6s ease-out 1.05s both; }
+    #view-about.active .ab-label { animation: abRiseIn .5s ease-out 1.15s both; }
+    #view-about.active .ab-skills > * { animation: abRiseIn .6s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--k, 0) * .12s + 1.2s); }
+    #view-about.active .back-row { animation: abRiseIn .5s ease-out 1.5s both; }
+    @keyframes abSlideDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: none; } }
+    @keyframes abSlideRight { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: none; } }
+    @keyframes abPop { from { opacity: 0; transform: scale(.4) rotate(-8deg); } to { opacity: 1; transform: none; } }
+    @keyframes abFlipIn { from { opacity: 0; transform: perspective(600px) rotateY(-70deg) translateX(30px); } to { opacity: 1; transform: none; } }
+    @keyframes abRiseIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { #view-about * { animation: none !important; } }
     /* contact button pinned to the top-right corner of the page (desktop) */
     @media (min-width: 901px) {
       .navbar { padding-left: 28px; padding-right: 28px; }
@@ -1005,6 +1039,7 @@
     }
     // Achievements: stagger index so the entries appear one by one
     document.querySelectorAll('#view-education .tl-item').forEach((el, i) => el.style.setProperty('--i', i));
+    document.querySelectorAll('#view-about .ab-cards .ab-card, #view-about .ab-skills > *').forEach((el, i, all) => el.style.setProperty('--k', el.closest('.ab-cards') ? [...el.parentNode.children].indexOf(el) : [...el.parentNode.children].indexOf(el)));
     window.addEventListener('resize', fitAbout);
     window.addEventListener('load', fitAbout);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAbout);
