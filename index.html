@@ -524,6 +524,15 @@
     .ab-sub { font-family: var(--hand); font-size: 1.5rem; color: var(--muted); margin-left: 10px; white-space: nowrap; }
     @media (max-width: 700px) { .ab-title-wrap { flex-wrap: wrap; justify-content: center; row-gap: 4px; } .ab-sub { flex-basis: 100%; text-align: center; margin-left: 0; white-space: normal; font-size: 1.25rem; } }
     .ab .back-row { margin-top: 20px; }
+
+    /* Personal Information: motto line + fact-card text */
+    .ab-motto { font-family: var(--hand); font-size: 1.55rem; line-height: 1.2; color: var(--muted); margin: 0 0 4px; }
+    .ab-mini > div { min-width: 0; }
+    .ab-mini .ab-v { overflow-wrap: break-word; }
+    .ab-contact { font-size: .9rem; }
+    .ab-contact a { white-space: normal; }
+    .ab-contact a.nw { white-space: nowrap; }
+    @media (min-width: 1500px) { .ab { max-width: 1400px; } }
     #view-about .back-row { margin-top: 20px; }
     @media (min-width: 901px) { #view-about .back-row { margin-top: 12px; padding-bottom: 4px; } }
 
@@ -619,13 +628,13 @@
       .ab-head { margin: 0 0 14px; gap: 12px; }
       .ab-head [data-card] { zoom: .5; }
       .ab-title { font-size: 2.8rem; }
-      .ab-top { grid-template-columns: minmax(0, 5.7fr) minmax(0, 5.3fr); gap: 28px; align-items: stretch; }
+      .ab-top { grid-template-columns: minmax(0, 4.8fr) minmax(0, 6.2fr); gap: 28px; align-items: stretch; }
       .ab-bio { display: flex; flex-direction: column; justify-content: flex-start; gap: 12px; }
       .ab-bio .ab-id { margin: 0 0 2px; }
       .ab-side { align-self: end; }
       .ab-bio p { font-size: 1.35rem; line-height: 1.5; margin: 0; }
       .ab-bio .paper-rule { display: none; }
-      .ab-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .ab-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
       .ab-mini { padding: 12px 14px; gap: 10px; }
       .ab-mini .ab-n { width: 28px; height: 28px; font-size: .85rem; margin-top: 0; }
       .ab-mini .ab-k { font-size: .75rem; }
@@ -765,22 +774,25 @@
             <img src="assets/photo.jpg" alt="N Christine profile photo" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 230 230%27%3E%3Crect width=%27230%27 height=%27230%27 fill=%27%23d9d9d6%27/%3E%3Ctext x=%2750%25%27 y=%2754%25%27 text-anchor=%27middle%27 font-family=%27Georgia,serif%27 font-size=%2772%27 fill=%27%234d2b12%27%3ENC%3C/text%3E%3C/svg%3E'" />
             <div><div class="ab-id-name">N Christine</div><div class="ab-id-sub">BSCS</div></div>
           </div>
-            <p>I'm a first-year Computer Science student at the University of the Cordilleras. I use Python, Java, and analytics to find patterns in data and turn them into tools that are simple and genuinely useful to the people who use them.</p>
-            <p>Alongside my studies, I've spent over a year as a training coordinator at a private school and run my own tutoring business, turning complex math problems into clear, bite-sized lessons. That experience taught me to explain technical ideas simply, a skill I'm excited to bring to reporting and presenting data.</p>
-            <p>Outside class, I explore linguistics and build digital study spaces. I learn fast, stay curious, and I'm ready to grow into an analyst who makes insights easy for anyone to understand.</p>
+          <div class="ab-motto">“You can’t add days to your life, but you can add life to your days.”</div>
+            <p>I'm a first-year Computer Science student at the University of the Cordilleras who uses Python, Java, and analytics to turn data into simple, useful tools. I've spent over a year as a training coordinator and run my own tutoring business, which taught me to explain complex ideas simply. I'm resilient and resourceful, and I'm working toward becoming a data analyst.</p>
             <hr class="paper-rule" />
           </section>
           
           <div class="ab-side">
             <div class="ab-cards">
-              <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Birthday</div><div class="ab-v"><span class="nw">April 19, 2006</span> · <span class="nw">20 years old</span></div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Status</div><div class="ab-v">Single</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">Location</div><div class="ab-v">Yangon, Myanmar</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">College · 1st year</div><div class="ab-v"><span class="nw">University of the Cordilleras</span><br><span class="nw">BS Computer Science</span></div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">5</span><div><div class="ab-k">Hobbies</div><div class="ab-v"><span class="nw">Gaming · Sketching</span><br><span class="nw">Self-studying</span></div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">6</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">7</span><div><div class="ab-k">Technical</div><div class="ab-v">Python · Java</div></div></div>
-              <div class="ab-card ab-mini"><span class="ab-n">8</span><div><div class="ab-k">Contact</div><div class="ab-v ab-contact"><a class="nw" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">nhchristine725@gmail.com</a><br><a class="nw" href="tel:+639278258065">0927 825 8065</a></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">1</span><div><div class="ab-k">Name</div><div class="ab-v">N Christine · <span class="nw">Nickname: Kris</span></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">2</span><div><div class="ab-k">Birthday</div><div class="ab-v"><span class="nw">April 19, 2006</span> · <span class="nw">20 years old</span></div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">3</span><div><div class="ab-k">Sex · Status</div><div class="ab-v">Female · Single</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">4</span><div><div class="ab-k">Nationality · Religion</div><div class="ab-v">Myanmar · Christian</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">5</span><div><div class="ab-k">Hometown</div><div class="ab-v">Yangon, Myanmar</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">6</span><div><div class="ab-k">Current address</div><div class="ab-v">Guisad Sorung, Baguio, Philippines</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">7</span><div><div class="ab-k">College · 1st year</div><div class="ab-v">University of the Cordilleras<br>BS Computer Science</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">8</span><div><div class="ab-k">Previous school</div><div class="ab-v">BTC Myitkyina</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">9</span><div><div class="ab-k">Parents</div><div class="ab-v">Nang Hee Syndang<br>Yingthan Gin Zi</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">10</span><div><div class="ab-k">Hobbies</div><div class="ab-v">Gaming · Sketching<br>Self-studying</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">11</span><div><div class="ab-k">Languages</div><div class="ab-v">English · Burmese</div></div></div>
+              <div class="ab-card ab-mini"><span class="ab-n">12</span><div><div class="ab-k">Contact</div><div class="ab-v ab-contact"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nhchristine725@gmail.com" target="_blank" rel="noopener">nhchristine725<wbr>@gmail.com</a><br><a class="nw" href="tel:+639278258065">0927 825 8065</a></div></div></div>
             </div>
           </div>
         </div>
