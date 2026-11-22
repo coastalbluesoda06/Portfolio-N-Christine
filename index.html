@@ -5,23 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Information — N Christine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Gaegu:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="personal.css" />
 </head>
-<body id="top">
+<body>
   <header class="navbar">
-    <a href="index.html" class="logo">N CHRISTINE</a>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
     <nav id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="personal.html" class="active">Personal information</a>
-      <a href="achievements.html">Achievements</a>
-      <a href="family.html">Family</a>
+      <a href="index.html">home</a>
+      <a href="personal.html" class="active">personal information</a>
+      <a href="index.html" class="logo">N Christine</a>
+      <a href="achievements.html">achievements</a>
+      <a href="family.html">family</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
     </nav>
   </header>
-  <main id="app" class="pi"></main>
+
+  <main class="page">
+    <div class="page-head">
+      <span class="card-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.2"/><path d="M5.5 20c.8-3.6 3.4-5.4 6.5-5.4s5.7 1.8 6.5 5.4"/></svg>
+      </span>
+      <span class="page-num">02</span>
+      <span class="page-dash"></span>
+      <h1>Personal Information</h1>
+    </div>
+
+    <div class="info">
+      <section class="profile">
+        <div class="id-row">
+          <img class="photo" src="images/profile.jpg" alt="N Christine" />
+          <div>
+            <h2 class="name">N Christine</h2>
+            <p class="course">BSCS</p>
+          </div>
+        </div>
+        <div class="bio">
+          <p>I'm a first-year Computer Science student at the University of the Cordilleras who uses Python, Java, and analytics to turn data into simple, useful tools.</p>
+          <p>I've spent over a year as a training coordinator and run my own tutoring business, which taught me to explain complex ideas simply.</p>
+          <p>I'm resilient and resourceful, and I'm working toward becoming a data analyst.</p>
+        </div>
+        <blockquote class="motto">You can't add days to your life, but you can add life to your days.</blockquote>
+      </section>
+
+      <section class="facts" aria-label="Personal details">
+        <article class="fact"><span class="badge">1</span><div><h3>Nickname</h3><p>Kris</p></div></article>
+        <article class="fact"><span class="badge">2</span><div><h3>Birthday</h3><p>April 19, 2006 · 20 years old</p></div></article>
+        <article class="fact"><span class="badge">3</span><div><h3>Sex · Status</h3><p>Female · Single</p></div></article>
+        <article class="fact"><span class="badge">4</span><div><h3>Nationality · Religion</h3><p>Myanmar · Christian</p></div></article>
+        <article class="fact"><span class="badge">5</span><div><h3>Hometown</h3><p>Yangon, Myanmar</p></div></article>
+        <article class="fact"><span class="badge">6</span><div><h3>Current address</h3><p>Guisad Sorung, Baguio, Philippines</p></div></article>
+        <article class="fact"><span class="badge">7</span><div><h3>College · 1st year</h3><p>University of the Cordilleras<br />BS Computer Science</p></div></article>
+        <article class="fact"><span class="badge">8</span><div><h3>Previous school</h3><p>BTC Myitkyina</p></div></article>
+        <article class="fact"><span class="badge">9</span><div><h3>Parents</h3><p>Nang Hee Syndang<br />Yingthan Gin Zi</p></div></article>
+        <article class="fact"><span class="badge">10</span><div><h3>Hobbies</h3><p>Gaming · Sketching · Self-studying</p></div></article>
+        <article class="fact"><span class="badge">11</span><div><h3>Languages</h3><p>English · Burmese</p></div></article>
+        <article class="fact"><span class="badge">12</span><div><h3>Contact</h3><p>nhchristine725@gmail.com<br />0927 825 8065</p></div></article>
+      </section>
+    </div>
+
+    <h2 class="skills-label">Skills</h2>
+    <div class="skills">
+      <article class="skill">
+        <h3><span class="badge">1</span>Programming Fundamentals</h3>
+        <ul class="chips"><li>Python &amp; Java Basics</li><li>HTML/CSS</li><li>Code Reading</li></ul>
+      </article>
+      <article class="skill">
+        <h3><span class="badge">2</span>Digital Content &amp; Design</h3>
+        <ul class="chips"><li>Web Layouts</li><li>Visual Presentation</li><li>Branding</li></ul>
+      </article>
+      <article class="skill">
+        <h3><span class="badge">3</span>Teaching &amp; Coordination</h3>
+        <ul class="chips"><li>Instruction</li><li>Lesson Planning</li><li>Team Coordination</li></ul>
+      </article>
+    </div>
+  </main>
+
+  <div class="blob" aria-hidden="true"></div>
   <script src="personal.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
